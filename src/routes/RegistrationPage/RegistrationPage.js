@@ -20,7 +20,7 @@ class RegistrationPage extends Component {
         <h2>Register</h2>
         <RegistrationForm 
           onRegistrationSuccess={this.handleRegistrationSuccess}
-        />>
+        />
       </Section>
      );
   }
