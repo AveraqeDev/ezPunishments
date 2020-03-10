@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Button, Input, Textarea, Required } from '../Utils/Utils';
-import AuthApiService from '../../services/auth-api-service';
+import PunishmentApiService from '../../services/punishment-api-service';
 
 class PunishForm extends Component {
   static defaultProps = {
@@ -23,7 +23,7 @@ class PunishForm extends Component {
     if(type.value !== 'Permanent')
       expires = moment(new Date()).add(parseInt(length.value), type.value).utc().toISOString();
     
-    AuthApiService.postPunishment({
+    PunishmentApiService.postPunishment({
       name: name.value,
       reason: reason.value,
       proof: proof.value,
