@@ -36,7 +36,7 @@ class PunishForm extends Component {
         reason.value = '';
         proof.valie = '';
         length.value = '1';
-        type.valie = 'h';
+        type.value = 'h';
         this.props.onPunishSuccess();
       })
       .catch(res => {
