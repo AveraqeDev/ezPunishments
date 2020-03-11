@@ -29,6 +29,15 @@ const AuthApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()  
       );
+  },
+
+  getAllUsers() {
+    return fetch(`${config.API_ENDPOINT}/users`)
+      .then(res => 
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()  
+      )
   }
 };
 

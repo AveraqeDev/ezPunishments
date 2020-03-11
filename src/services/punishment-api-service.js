@@ -24,17 +24,31 @@ const PunishmentApiService = {
     return fetch(`${config.API_ENDPOINT}/punishments`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(punishment)
     })
       .then(res => 
         (!res.ok)
-          ? res.json.then(e => Promise.reject(e))
+          ? res.json().then(e => Promise.reject(e))
           : res.json()  
       );
   },
+
+  updatePunishment(id, newPunishmentFields) {
+    return fetch(`${config.API_ENDPOINT}/punishments/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newPunishmentFields)
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      );
+  }
 };
 
 export default PunishmentApiService;

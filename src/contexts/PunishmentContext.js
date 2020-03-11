@@ -5,6 +5,7 @@ export const nullPunishment = {
   reason: '',
   proof: '',
   punished_by: '',
+  active: false,
   expires: ''
 }
 
