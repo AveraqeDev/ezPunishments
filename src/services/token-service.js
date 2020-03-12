@@ -34,6 +34,10 @@ const TokenService = {
     }
   },
 
+  clearUser() {
+    window.sessionStorage.removeItem(config.USER_KEY);
+  },
+
   isStaff() {
     const user = JSON.parse(window.sessionStorage.getItem(config.USER_KEY));
     return user && (user.role === 'staff' || user.role === 'admin');

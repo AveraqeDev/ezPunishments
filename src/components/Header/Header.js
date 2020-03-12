@@ -1,23 +1,78 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import TokenService from '../../services/token-service';
 
 class Header extends Component {
   
   handleLogoutClick = () => {
-
+    TokenService.clearAuthToken();
+    TokenService.clearUser();
   }
 
   renderLogoutLink() {
-
+    return (
+      <div className='Header__logged-in'>
+        <Link
+          onClick={this.handleLogoutClick}
+          to='/'
+        >
+          Logout
+        </Link>
+      </div>
+    )
   }
 
   renderLoginLink() {
-
+    return (
+      <div className='Header__not-logged-in'>
+        <Link
+          to='/login'
+        >
+          Login
+        </Link>
+        <Link
+          to='/register'
+        >
+          Register
+        </Link>
+      </div>
+    )
   }
 
   renderNav() {
-    
+    return (
+      <ul className='Header__nav'>
+        <li>
+          <Link
+            to='/'
+          >
+            Home
+          </Link>
+        </li>
+        <li>
+        <Link
+            to='/punishments'
+          >
+            Punishments
+          </Link>
+        </li>
+        <li>
+        <Link
+            to='/users'
+          >
+            Users
+          </Link>
+        </li>
+        <li>
+        <Link
+            to='/'
+          >
+            Moderation
+          </Link>
+        </li>
+      </ul>
+    )
   }
 
   render() { 
@@ -31,7 +86,9 @@ class Header extends Component {
           </Link>
         </h1>
         {this.renderNav()}
-        {this.renderLoginLink()}
+        {TokenService.hasAuthToken()
+          ? this.renderLogoutLink()
+          : this.renderLoginLink()}
       </nav>
      );
   }
