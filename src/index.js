@@ -19,7 +19,7 @@ ReactDOM.render(
   <BrowserRouter>
     <PunishmentListProvider>
       <PunishmentProvider>
-        <App />
+          <App />
       </PunishmentProvider>
     </PunishmentListProvider>
   </BrowserRouter>, 

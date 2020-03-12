@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DataTable from '../../components/DataTable/DataTable';
 import { Section } from '../../components/Utils/Utils';
 
-import AuthApiService from '../../services/auth-api-service';
+import UserApiService from '../../services/user-api-service';
 
 class UserListPage extends Component {
   state = { 
@@ -13,7 +13,7 @@ class UserListPage extends Component {
 
    componentDidMount() {
     this.setState({ error: null });
-    AuthApiService.getAllUsers()
+    UserApiService.getAllUsers()
       .then(users => this.setState({
         headings: Object.keys(users[0]),
         rows: users.map(user => Object.values(user))

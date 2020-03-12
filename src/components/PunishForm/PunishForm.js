@@ -15,6 +15,7 @@ class PunishForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     const { name, reason, proof, length, type } = e.target;
 
     this.setState({ error: null });

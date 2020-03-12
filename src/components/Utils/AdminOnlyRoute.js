@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import TokenService from '../../services/token-service';
 
@@ -8,7 +8,7 @@ export default function PrivateRoute({component, ...props}) {
     <Route
       {...props}
       render={componentProps => (
-        TokenService.hasAuthToken()
+        TokenService.isAdmin() 
           ? <Component {...componentProps} />
           : <Redirect
               to={{

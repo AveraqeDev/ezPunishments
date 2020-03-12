@@ -25,9 +25,9 @@ class Header extends Component {
       <nav className='Header'>
         <h1>
           <Link to='/'>
-            <FontAwesomeIcon icon='gavel' />>
-              {' '}
-              eZPunishments
+            eZPunishments
+            {' '}
+            <FontAwesomeIcon icon='gavel' />
           </Link>
         </h1>
         {this.renderNav()}
