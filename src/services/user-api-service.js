@@ -18,6 +18,21 @@ const UserApiService = {
           : res.json()
       );
   },
+
+  updateUser(id, newUserFields) {
+    return fetch(`${config.API_ENDPOINT}/users/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUserFields)
+    })
+      .then(res => 
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.statusText  
+      );
+  }
 };
 
 export default UserApiService;

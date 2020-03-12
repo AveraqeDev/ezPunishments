@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Cell from './Cell';
 
 class DataTable extends Component {
-  renderHeadingRow = (cell, cellIndex) => {
+  renderHeadingRow = (_cell, cellIndex) => {
     const { headings } = this.props;
     
     return(
@@ -14,12 +14,12 @@ class DataTable extends Component {
     );
   }
 
-  renderRow = (row, rowIndex) => {
+  renderRow = (_row, rowIndex) => {
     const {rows} = this.props;
 
     return (
       <tr key={`row-${rowIndex}`}>
-        {rows[rowIndex].map((cell, cellIndex) => {
+        {rows[rowIndex].map((_cell, cellIndex) => {
           return (
             <Cell 
               key={`${rowIndex}-${cellIndex}`}

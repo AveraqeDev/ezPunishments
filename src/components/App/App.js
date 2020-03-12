@@ -68,6 +68,7 @@ class App extends Component {
             />
 
             <AdminOnlyRoute
+              exact
               path='/users'
               component={UserListPage}
             />

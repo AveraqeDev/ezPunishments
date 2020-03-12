@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PunishmentListContext from '../../contexts/PunishmentListContext';
 import PunishmentApiService from '../../services/punishment-api-service';
 import { Section } from '../../components/Utils/Utils';
@@ -18,8 +19,23 @@ class PunishmentListPage extends Component {
       .then(this.context.setPunishmentList)
       .then(() => {
         this.setState({ 
-          headings: Object.keys(this.context.punishmentList[0]),
-          rows: this.context.punishmentList.map(punishment => Object.values(punishment))
+          headings: [
+            'ID',
+            'IGN',
+            'Reason',
+            'Punished By',
+            'Active',
+            'Expires'
+          ],
+          rows: this.context.punishmentList.map(punishment => [
+            punishment.id,
+            punishment.name,
+            punishment.reason,
+            punishment.punished_by,
+            (punishment.active ? 'Yes' : 'No'),
+            new Date(punishment.expires).toLocaleDateString(),
+            (<Link className='PunishmentListPage__button' to={`/punishments/${punishment.id}`}>View</Link>)
+          ])
         });
       })
       .catch(this.context.setError);
