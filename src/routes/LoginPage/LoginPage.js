@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from '../../components/LoginForm/LoginForm';
+import UserContext from '../../contexts/UserContext';
+import TokenService from '../../services/token-service';
 import { Section } from '../../components/Utils/Utils';
 
 class LoginPage extends Component {
@@ -10,9 +12,14 @@ class LoginPage extends Component {
     }
   }
 
+  static contextType = UserContext;
+
   handleLoginSuccess = () => {
     const { location, history } = this.props;
     const destination = (location.state || {}).from ||'/';
+
+    this.context.setUser(TokenService.parseAuthToken());
+
     history.push(destination);
   }
 

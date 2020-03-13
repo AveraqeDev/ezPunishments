@@ -3,7 +3,6 @@ import config from '../config';
 const TokenService = {
   saveAuthToken(token) {
     window.sessionStorage.setItem(config.TOKEN_KEY, token);
-    window.sessionStorage.setItem(config.USER_KEY, JSON.stringify(this.parseAuthToken()));
   },
 
   getAuthToken() {
@@ -33,20 +32,6 @@ const TokenService = {
       role: payload.role
     }
   },
-
-  clearUser() {
-    window.sessionStorage.removeItem(config.USER_KEY);
-  },
-
-  isStaff() {
-    const user = JSON.parse(window.sessionStorage.getItem(config.USER_KEY));
-    return user && (user.role === 'staff' || user.role === 'admin');
-  },
-
-  isAdmin() {
-    const user = JSON.parse(window.sessionStorage.getItem(config.USER_KEY));
-    return user && (user.role === 'admin');
-  }
 };
 
 export default TokenService;

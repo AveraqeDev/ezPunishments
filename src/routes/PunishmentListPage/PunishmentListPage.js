@@ -1,54 +1,47 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PunishmentListContext from '../../contexts/PunishmentListContext';
 import PunishmentApiService from '../../services/punishment-api-service';
 import { Section } from '../../components/Utils/Utils';
 import DataTable from '../../components/DataTable/DataTable';
 
 class PunishmentListPage extends Component {
   state = {
-    headings: [],
-    rows: []
+    punishmentList: [],
+    error: null
   }
-  
-  static contextType = PunishmentListContext;
 
   componentDidMount() {
-    this.context.clearError();
+    this.setState({ error: null });
     PunishmentApiService.getPunishments()
-      .then(this.context.setPunishmentList)
-      .then(() => {
-        this.setState({ 
-          headings: [
-            'ID',
-            'IGN',
-            'Reason',
-            'Punished By',
-            'Active',
-            'Expires'
-          ],
-          rows: this.context.punishmentList.map(punishment => [
-            punishment.id,
-            punishment.name,
-            punishment.reason,
-            punishment.punished_by,
-            (punishment.active ? 'Yes' : 'No'),
-            new Date(punishment.expires).toLocaleDateString(),
-            (<Link className='PunishmentListPage__button' to={`/punishments/${punishment.id}`}>View</Link>)
-          ])
-        });
-      })
-      .catch(this.context.setError);
+      .then(punishmentList => this.setState({punishmentList}))
+      .catch(error => this.setState({error}));
   }
 
   renderPunishmentsTable() {
+    const headings = [
+      'ID',
+      'IGN',
+      'Reason',
+      'Punished By',
+      'Active',
+      'Expires'
+    ];
+    const rows = this.state.punishmentList.map(punishment => [
+      punishment.id,
+      punishment.name,
+      punishment.reason,
+      punishment.punished_by,
+      (punishment.active ? 'Yes' : 'No'),
+      new Date(punishment.expires).toLocaleDateString(),
+      (<Link className='PunishmentListPage__button' to={`/punishments/${punishment.id}`}>View Punishment</Link>)
+    ]);
     return(
-      <DataTable headings={this.state.headings} rows={this.state.rows} />
+      <DataTable headings={headings} rows={rows} />
     )
   }
 
   render() { 
-    const { error } = this.context;
+    const { error } = this.state;
     return ( 
       <Section className='PunishmentListPage'>
         <h2>Punishments</h2>

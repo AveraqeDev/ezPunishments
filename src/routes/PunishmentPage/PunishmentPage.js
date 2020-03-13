@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PunishmentContext from '../../contexts/PunishmentContext';
 import PunishmentApiService from '../../services/punishment-api-service';
 import { Section, Button, Input } from '../../components/Utils/Utils';
 
@@ -15,27 +14,21 @@ class PunishmentPage extends Component {
   }
 
   state = {
+    punishment: null,
+    error: null,
     edit: false,
     type: 'h'
   }
 
-  static contextType = PunishmentContext;
-
   componentDidMount() {
+    this.setState({ error: null })
     const { punishmentId } = this.props.match.params;
-    this.context.clearError();
     PunishmentApiService.getPunishment(punishmentId)
-      .then(this.context.setPunishment)
-      .catch(this.context.setError)
-  }
-
-  componentWillUnmount() {
-    this.context.clearPunishment();
+      .then(punishment => this.setState({punishment}))
+      .catch(error => this.setState({error}));
   }
 
   handleEditClick = e => {
-    e.preventDefault();
-
     this.setState({ edit: true });
   }
 
@@ -46,7 +39,7 @@ class PunishmentPage extends Component {
     }
     PunishmentApiService.updatePunishment(this.props.match.params.punishmentId, newPunishmentFields)
       .then(punishment => {
-        this.context.setPunishment({...punishment})
+        this.setState({ punishment: {...punishment} })
       })
   }
 
@@ -58,7 +51,7 @@ class PunishmentPage extends Component {
   handleEditSave = e => {
     e.preventDefault();
 
-    const { punishment } = this.context;
+    const { punishment } = this.state;
 
     const { reason, proof, punished_by, removed_by, length, type } = e.target;
 
@@ -66,7 +59,7 @@ class PunishmentPage extends Component {
 
     let newExpires = null;
     if(type.value !== 'Permanent')
-      newExpires = moment(new Date(this.context.punishment.expires)).add(parseInt(length.value || 0), this.state.type).utc().toISOString();
+      newExpires = moment(new Date(punishment.expires)).add(parseInt(length.value || 0), type.value).utc().toISOString();
 
     const updated = moment(new Date()).utc().toISOString();
 
@@ -80,8 +73,7 @@ class PunishmentPage extends Component {
     };
     PunishmentApiService.updatePunishment(this.props.match.params.punishmentId, newPunishmentFields)
       .then(punishment => {
-        this.context.setPunishment({...punishment})
-        this.setState({ edit: false });
+        this.setState({ punishment: {...punishment}, edit: false });
       })
   }
 
@@ -93,7 +85,7 @@ class PunishmentPage extends Component {
   }
 
   renderEditMode() {
-    const { id, name, reason, proof, punished_by, removed_by, active, expires, date_punished, updated } = this.context.punishment;
+    const { id, name, reason, proof, punished_by, removed_by, active, expires, date_punished, updated } = this.state.punishment;
     return (
       <Confirm title='Confirm Save' description='Are you sure you want to save these changes?'>
         {confirm => (
@@ -189,7 +181,7 @@ class PunishmentPage extends Component {
   }
 
   renderStaticMode() {
-    const { id, name, reason, proof, punished_by, removed_by, active, expires, date_punished, updated } = this.context.punishment;
+    const { id, name, reason, proof, punished_by, removed_by, active, expires, date_punished, updated } = this.state.punishment;
     return (
       <Confirm title='Confirm Removal' description='Are you sure you want to remove this punishment?'>
         {confirm => (
@@ -224,8 +216,7 @@ class PunishmentPage extends Component {
   }
 
   render() { 
-    const { error, punishment } = this.context;
-    const { edit } = this.state;
+    const { punishment, error, edit } = this.state;
     let content;
     if(error) {
       content = (error.error === 'Punishment doesn\'t exist')

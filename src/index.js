@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { PunishmentProvider } from './contexts/PunishmentContext';
-import { PunishmentListProvider } from './contexts/PunishmentListContext';
+import { UserProvider } from './contexts/UserContext';
 import './index.css';
 import App from './components/App/App';
 
@@ -17,10 +16,8 @@ library.add(
 
 ReactDOM.render(
   <BrowserRouter>
-    <PunishmentListProvider>
-      <PunishmentProvider>
-          <App />
-      </PunishmentProvider>
-    </PunishmentListProvider>
+    <UserProvider>
+      <App />
+    </UserProvider>
   </BrowserRouter>, 
   document.getElementById('root'));

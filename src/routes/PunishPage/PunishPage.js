@@ -10,7 +10,7 @@ class PunishPage extends Component {
   }
 
   handlePunishSuccess = punishment => {
-    
+    this.props.history.push(`/punishments/${punishment.id}`);
   }
 
   render() { 

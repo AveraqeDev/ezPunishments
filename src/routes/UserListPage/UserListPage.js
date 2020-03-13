@@ -7,40 +7,35 @@ import UserApiService from '../../services/user-api-service';
 
 class UserListPage extends Component {
   state = { 
-    headings: [],
-    rows: [], 
+    users: [],
     error: null
    }
 
    componentDidMount() {
     this.setState({ error: null });
     UserApiService.getAllUsers()
-      .then(users => this.setState({
-        headings: [
-          'ID',
-          'Email',
-          'Username',
-          'Role',
-          'Date Created'
-        ],
-        rows: users.map(user => [
-          user.id,
-          user.email,
-          user.user_name,
-          user.user_role,
-          new Date(user.date_created).toLocaleString(),
-          (<Link className='UserListPage__button' to={`/users/${user.id}`}>View Profile</Link>)
-        ])
-      }))
+      .then(users => this.setState({ users }))
       .catch(error => this.setState({ error }));
    }
 
    renderPunishmentsTable() {
-     this.state.rows.forEach(row => {
-       row.push()
-     })
+    const headings = [
+      'ID',
+      'Email',
+      'Username',
+      'Role',
+      'Date Created'
+    ];
+    const rows = this.state.users.map(user => [
+      user.id,
+      user.email,
+      user.user_name,
+      user.user_role,
+      new Date(user.date_created).toLocaleString(),
+      (<Link className='UserListPage__button' to={`/users/${user.id}`}>View User</Link>)
+    ]);
     return(
-      <DataTable headings={this.state.headings} rows={this.state.rows} />
+      <DataTable headings={headings} rows={rows} />
     )
   }
 
