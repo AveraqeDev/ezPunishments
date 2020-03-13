@@ -65,6 +65,8 @@ class LoginForm extends Component {
         <Button className='LoginForm__login' type='submit'>
           Login
         </Button>
+        <p>Forgot Password?</p>
+        <Link className='LoginForm__forgot' to='/resetpw'>Reset Password</Link>
         <p>Don't have an account?</p>
         <Link className='LoginForm__register' to='/register'>Sign up</Link>
       </form>
