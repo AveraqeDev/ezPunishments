@@ -11,6 +11,24 @@ const PunishmentApiService = {
       );
   },
 
+  getUserPunishments(user) {
+    return fetch(`${config.API_ENDPOINT}/users/${user.id}/punishments`)
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()  
+      );
+  },
+
+  getPunishmentsByUser(user) {
+    return fetch(`${config.API_ENDPOINT}/users/${user.id}/punishes`)
+    .then(res =>
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()  
+    );
+  },
+
   getPunishments() {
     return fetch(`${config.API_ENDPOINT}/punishments`)
     .then(res => 

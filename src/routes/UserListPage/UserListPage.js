@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DataTable from '../../components/DataTable/DataTable';
-import { Section, Button } from '../../components/Utils/Utils';
+import { Section } from '../../components/Utils/Utils';
 
 import UserApiService from '../../services/user-api-service';
 
@@ -36,7 +36,6 @@ class UserListPage extends Component {
    }
 
    renderPunishmentsTable() {
-     //this.state.headings.push('controls');
      this.state.rows.forEach(row => {
        row.push()
      })
