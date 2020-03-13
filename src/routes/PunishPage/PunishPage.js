@@ -4,6 +4,10 @@ import PunishForm from '../../components/PunishForm/PunishForm';
 
 class PunishPage extends Component {
   static defaultProps = {
+    match: {
+      params: {
+      }
+    },
     history: {
       push: () => {}
     }
@@ -14,10 +18,15 @@ class PunishPage extends Component {
   }
 
   render() { 
+    let user = '';
+    if(this.props.match.params.userName) {
+      user = this.props.match.params.userName;
+    }
     return ( 
       <Section className='PunishPage'>
         <h2>Punish a Player</h2>
         <PunishForm
+          user={user}
           onPunishSuccess={this.handlePunishSuccess}
         />
       </Section>

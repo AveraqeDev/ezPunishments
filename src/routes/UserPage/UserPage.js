@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Section } from '../../components/Utils/Utils';
+import { Link } from 'react-router-dom';
+import { Section, Button } from '../../components/Utils/Utils';
 import UserApiService from '../../services/user-api-service';
 import PunishmentApiService from '../../services/punishment-api-service';
+import UserContext from '../../contexts/UserContext';
+
+import DataTable from '../../components/DataTable/DataTable';
 
 class UserPage extends Component {
   state = {
@@ -10,6 +14,8 @@ class UserPage extends Component {
     executedPunishments: [],
     error: null
   }
+
+  static contextType = UserContext;
 
   componentDidMount() {
     this.setState({error: null});
@@ -30,22 +36,75 @@ class UserPage extends Component {
           .catch(error => this.setState({error}));
       })
       .catch(error => this.setState({error}));
+    }
+
+  renderPunishments(executed) {
+    const punishments = (executed ? this.state.executedPunishments : this.state.punishments);
+    let content = <p>No Punishments Found</p>;
+    let headings = [
+      'ID',
+      (executed ? 'Username' : 'Punished_by'),
+      'Reason',
+      'Active',
+      'Punished On',
+      'Expires On'
+    ];
+    let rows = punishments.map(punishment => [
+      punishment.id,
+      (executed ? punishment.name : punishment.punished_by),
+      punishment.reason,
+      (punishment.active ? 'Yes' : 'No'),
+      new Date(punishment.date_punished).toLocaleDateString(),
+      new Date(punishment.expires).toLocaleDateString()
+    ]);
+    if(rows.length > 0) {
+      content = <DataTable headings={headings} rows={rows} />
+    }
+    return (
+      content
+    )
   }
 
-  renderPunishments() {
-
-  }
-
-  renderPunishmentsBy() {
-
+  handleStaffClick = e => {
+    let user_role = 'staff';
+    if(this.state.user.user_role === 'staff') {
+      user_role = 'member';
+    }
+    UserApiService.updateUser(this.state.user.id, {user_role})
+      .then(() =>
+        this.setState({
+          user: {
+            ...this.state.user,
+            user_role
+          }
+        })
+      )
+      .catch(error => this.setState({error}));
   }
 
   renderUser() {
-    
     return (
       <>
         <div className='UserPage__user_heading'>
-          
+          <h2>{this.state.user.user_name}</h2>
+          <div className='IserPage__user_heading-controls'>
+            {this.context.isStaff() && this.state.user.user_role === 'member'
+              ? <Link to={`/punish/${this.state.user.user_name}`}>Punish Player</Link>
+              : ''}
+            {this.context.isAdmin()
+              ? (this.state.user.user_role === 'member'
+                  ? <Button onClick={this.handleStaffClick}>Set Staff</Button>
+                  : <Button onClick={this.handleStaffClick}>Remove Staff</Button>)
+              : ''}
+          </div>
+        </div>
+        <div className='UserPage__user_body'>
+          {this.state.user.user_role === 'member'
+            ? <h3>Punishment History</h3>
+            : <h3>Executed Punishments</h3>}
+          {this.state.user.user_role !== 'member'
+            ? this.renderPunishments(true) 
+            : this.renderPunishments(false)}
         </div>
       </>
     )

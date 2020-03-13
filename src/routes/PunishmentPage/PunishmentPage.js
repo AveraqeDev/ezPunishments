@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PunishmentApiService from '../../services/punishment-api-service';
 import { Section, Button, Input } from '../../components/Utils/Utils';
+import UserContext from '../../contexts/UserContext';
 
 import Confirm from '../../components/Confirm/Confirm';
 
@@ -19,6 +20,8 @@ class PunishmentPage extends Component {
     edit: false,
     type: 'h'
   }
+
+  static contextType = UserContext;
 
   componentDidMount() {
     this.setState({ error: null })
@@ -189,12 +192,15 @@ class PunishmentPage extends Component {
             <div className='PunishmentPage__heading'>
               <h2>{name}</h2>
               <p>Punishment #{id}</p>
-              <Button onClick={this.handleEditClick}>
+              <Button 
+                onClick={this.handleEditClick}
+                disabled={this.context.isAdmin() ? undefined : 'disabled'}
+              >
                 Edit
               </Button>
               <Button 
                 onClick={confirm(this.handleRemoveClick)}
-                disabled={active ? undefined : 'disabled'}
+                disabled={active && this.context.isAdmin() ? undefined : 'disabled'}
               >
                 Remove
               </Button>

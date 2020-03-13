@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TokenService from '../services/token-service';
+import PunishmentsApiService from '../services/punishment-api-service';
 
 const nullUser = {
   id: -1,
@@ -9,7 +10,7 @@ const nullUser = {
 
 const UserContext = React.createContext({
   user: nullUser,
-  token: '',
+  punishments: [],
   error: null,
   setError: () => {},
   clearError: () => {},
@@ -24,6 +25,7 @@ export default UserContext;
 export class UserProvider extends Component {
   state = {
     user: nullUser,
+    punishments: [],
     error: null
   }
 
@@ -44,10 +46,21 @@ export class UserProvider extends Component {
 
   setUser = user => {
     this.setState({ user });
+    PunishmentsApiService.getUserPunishments(user)
+      .then(punishments => this.setPunishments(punishments))
+      .catch(error => this.setError(error));
   }
 
   clearUser = () => {
     this.setUser(nullUser);
+  }
+
+  setPunishments = punishments => {
+    this.setState({ punishments });
+  }
+
+  clearPunishments = () => {
+    this.setPunishments([]);
   }
 
   isStaff = () => {
@@ -61,12 +74,14 @@ export class UserProvider extends Component {
   render() {
     const value = {
       user: this.state.user,
-      token: this.state.token,
+      punishments: this.state.punishments,
       error: this.state.error,
       setError: this.setError,
       clearError: this.clearError,
       setUser: this.setUser,
       clearUser: this.clearUser,
+      setPunishments: this.setPunishments,
+      clearPunishments: this.clearPunishments,
       isStaff: this.isStaff,
       isAdmin: this.isAdmin
     };

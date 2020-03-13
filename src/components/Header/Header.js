@@ -17,6 +17,11 @@ class Header extends Component {
     return (
       <div className='Header__logged-in'>
         <Link
+          to='/profile'
+        >
+          My Profile
+        </Link>
+        <Link
           onClick={this.handleLogoutClick}
           to='/'
         >

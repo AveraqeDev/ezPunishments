@@ -63,7 +63,12 @@ class App extends Component {
             />
 
             <StaffOnlyRoute
+              exact
               path='/punish'
+              component={PunishPage}
+            />
+            <StaffOnlyRoute
+              path='/punish/:userName'
               component={PunishPage}
             />
             <StaffOnlyRoute

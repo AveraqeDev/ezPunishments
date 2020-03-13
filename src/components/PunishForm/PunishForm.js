@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Button, Input, Textarea, Required } from '../Utils/Utils';
 import PunishmentApiService from '../../services/punishment-api-service';
+import UserContext from '../../contexts/UserContext';
 
 class PunishForm extends Component {
   static defaultProps = {
+    user: '',
     onPunishSuccess: () => {}
   }
 
@@ -12,6 +14,8 @@ class PunishForm extends Component {
     type: 'h',
     error: null
   }
+
+  static contextType = UserContext;
 
   handleSubmit = e => {
     e.preventDefault();
@@ -28,7 +32,7 @@ class PunishForm extends Component {
       name: name.value,
       reason: reason.value,
       proof: proof.value,
-      punished_by: 'me hahahaha',
+      punished_by: this.context.user.username,
       expires
     })
       .then(punishment => {
@@ -38,7 +42,7 @@ class PunishForm extends Component {
         proof.valie = '';
         length.value = '1';
         type.value = 'h';
-        this.props.onPunishSuccess();
+        this.props.onPunishSuccess(punishment);
       })
       .catch(res => {
         this.setState({ error: res.error });
@@ -66,13 +70,24 @@ class PunishForm extends Component {
           <label htmlFor='PunishForm__name'>
             Username <Required />
           </label>
-          <Input
-            name='name'
-            type='text'
-            required
-            id='PunishForm__name'
-          >
-          </Input>
+          {this.props.user
+            ? <Input
+              name='name'
+              type='text'
+              required
+              id='PunishForm__name'
+              value={this.props.user}
+              disabled
+              >
+              </Input>
+            : <Input
+              name='name'
+              type='text'
+              required
+              id='PunishForm__name'
+              >
+              </Input>
+          }
         </div>
         <div className='reason'>
         <label htmlFor='PunishForm__reason'>
