@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Input } from '../Utils/Utils';
-import TokenService from '../../services/token-service';
 import AuthApiService from '../../services/auth-api-service';
 
 class LoginForm extends Component {
@@ -24,11 +24,10 @@ class LoginForm extends Component {
       .then(res => {
         username.value = '';
         password.value = '';
-        TokenService.saveAuthToken(res.authToken);
-        this.props.onLoginSuccess();
+        this.props.onLoginSuccess(res.authToken);
       })
-      .catch(res => {
-        this.setState({ error: res.error });
+      .catch(error => {
+        this.setState({ error });
       });
   }
   
@@ -40,7 +39,7 @@ class LoginForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-          {error && <p className='red'>{error}</p>}
+          {error && <p className='red'>There was an error!</p>}
         </div>
         <div className='username'>
           <label htmlFor='LoginForm__username'>
@@ -63,9 +62,11 @@ class LoginForm extends Component {
             id='LoginForm__password'
           ></Input>
         </div>
-        <Button type='submit'>
+        <Button className='LoginForm__login' type='submit'>
           Login
         </Button>
+        <p>Don't have an account?</p>
+        <Link className='LoginForm__register' to='/register'>Sign up</Link>
       </form>
     );
   }

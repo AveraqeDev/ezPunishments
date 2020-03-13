@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import UserContext from '../../contexts/UserContext';
 import TokenService from '../../services/token-service';
 
 class Header extends Component {
   
+  static contextType = UserContext;
+
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
-    TokenService.clearUser();
+    this.context.clearUser();
   }
 
   renderLogoutLink() {
@@ -86,7 +89,7 @@ class Header extends Component {
           </Link>
         </h1>
         {this.renderNav()}
-        {TokenService.hasAuthToken()
+        {this.context.user.id !== -1
           ? this.renderLogoutLink()
           : this.renderLoginLink()}
       </nav>

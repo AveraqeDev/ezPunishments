@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Section } from 'react-router-dom';
+import { Section } from '../../components/Utils/Utils';
 import UserApiService from '../../services/user-api-service';
 import PunishmentApiService from '../../services/punishment-api-service';
 
@@ -13,7 +13,7 @@ class UserPage extends Component {
 
   componentDidMount() {
     this.setState({error: null});
-    UserApiService.getById(this.props.match.userId)
+    UserApiService.getById(this.props.match.params.userId)
       .then(user => {
         PunishmentApiService.getUserPunishments(user)
           .then(punishments => {
@@ -41,7 +41,7 @@ class UserPage extends Component {
   }
 
   renderUser() {
-    const { user } = this.state;
+    
     return (
       <>
         <div className='UserPage__user_heading'>

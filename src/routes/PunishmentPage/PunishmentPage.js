@@ -14,7 +14,7 @@ class PunishmentPage extends Component {
   }
 
   state = {
-    punishment: null,
+    punishment: {},
     error: null,
     edit: false,
     type: 'h'
@@ -35,7 +35,7 @@ class PunishmentPage extends Component {
   handleRemoveClick = e => {
     const newPunishmentFields = {
       active: 'false',
-      updated: new Date().getUTCDate().toISOString()
+      updated: moment(new Date()).utc().toISOString()
     }
     PunishmentApiService.updatePunishment(this.props.match.params.punishmentId, newPunishmentFields)
       .then(punishment => {

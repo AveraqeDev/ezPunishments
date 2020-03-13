@@ -14,11 +14,12 @@ class LoginPage extends Component {
 
   static contextType = UserContext;
 
-  handleLoginSuccess = () => {
+  handleLoginSuccess = token => {
     const { location, history } = this.props;
     const destination = (location.state || {}).from ||'/';
 
-    this.context.setUser(TokenService.parseAuthToken());
+    TokenService.saveAuthToken(token);
+    this.context.setUser(TokenService.parseAuthToken(token));
 
     history.push(destination);
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Input, Required } from '../Utils/Utils';
 import AuthApiService from '../../services/auth-api-service';
+import { Link } from 'react-router-dom';
 
 class RegistrationForm extends Component {
   static defaultProps = {
@@ -75,9 +76,11 @@ class RegistrationForm extends Component {
             id='RegistrationForm__password'>
           </Input>
         </div>
-        <Button type='submit'>
+        <Button className='RegistrationForm__register' type='submit'>
           Register
         </Button>
+        <p>Already have an account?</p>
+        <Link className='RegistrationForm__login' to='/login'>Login</Link>
       </form>
      );
   }

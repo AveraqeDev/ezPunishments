@@ -38,6 +38,15 @@ const PunishmentApiService = {
     );
   },
 
+  getRecentPunishments() {
+    return fetch(`${config.API_ENDPOINT}/punishments?recent=true`)
+    .then(res => 
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()
+    );
+  },
+
   postPunishment(punishment) {
     return fetch(`${config.API_ENDPOINT}/punishments`, {
       method: 'POST',
