@@ -32,6 +32,25 @@ const UserApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.statusText  
       );
+  },
+
+  resetPassword(user_id, password, token) {
+    return fetch(`${config.API_ENDPOINT}/users/store-password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id,
+        password,
+        token
+      })
+    })
+      .then(res => 
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+        );
   }
 };
 
