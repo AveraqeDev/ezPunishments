@@ -7,6 +7,9 @@ class ResetPasswordPage extends Component {
   static defaultProps = {
     history: {
       push: () => {}
+    },
+    match: {
+      params: {}
     }
   };
 
@@ -19,6 +22,7 @@ class ResetPasswordPage extends Component {
       <Section className='ResetPasswordPage'>
         <h2>Reset Password</h2>
         <ResetPasswordForm 
+          match={this.props.match}
           onResetSuccess={this.handleResetSuccess}
         />
       </Section>

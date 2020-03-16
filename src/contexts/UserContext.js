@@ -52,7 +52,8 @@ export class UserProvider extends Component {
   }
 
   clearUser = () => {
-    this.setUser(nullUser);
+    this.setState({ user: nullUser })
+    this.clearPunishments();
   }
 
   setPunishments = punishments => {

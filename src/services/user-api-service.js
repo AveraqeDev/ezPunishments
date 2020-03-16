@@ -34,7 +34,22 @@ const UserApiService = {
       );
   },
 
-  resetPassword(user_id, password, token) {
+  resetPassword(user_name) {
+    return fetch(`${config.API_ENDPOINT}/users/resetpw`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({user_name})
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      );
+  },
+
+  storePassword(user_id, password, token) {
     return fetch(`${config.API_ENDPOINT}/users/store-password`, {
       method: 'POST',
       headers: {

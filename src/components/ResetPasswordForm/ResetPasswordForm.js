@@ -5,7 +5,7 @@ import UserApiService from '../../services/user-api-service';
 
 class ResetPasswordForm extends Component {
   static defaultProps = {
-    onResetSucces: () => {}
+    onResetSucces: () => {},
   }
 
   state = { 
@@ -21,7 +21,7 @@ class ResetPasswordForm extends Component {
     const { userId, token } = this.props.match.params;
     const { password, confirmPassword } = e.target;
     
-    UserApiService.resetPassword(userId, password.value, token)
+    UserApiService.storePassword(userId, password.value, token)
       .then(res => {
         password.value = '';
         confirmPassword.value = '';
@@ -36,16 +36,16 @@ class ResetPasswordForm extends Component {
     this.setState({ error: null });
 
     if(!password) {
-      return this.setState({disabledSubmit: 'disabled', error: 'New Password is required.'});
+      return this.setState({disabledSubmit: 'disabled', error: { message: 'New Password is required.'}});
     }
     if(!confirmPassword) {
-      return this.setState({disabledSubmit: 'disabled', error: 'Confirm New Password is required'});
+      return this.setState({disabledSubmit: 'disabled', error: { message: 'Confirm New Password is required'}});
     }
     
     if(password !== confirmPassword) {
-      return this.setState({disabledSubmit: 'disabled', error: 'Passwords do not match.'});
+      return this.setState({disabledSubmit: 'disabled', error: { message: 'Passwords do not match.'}});
     }
-    return this.setState({ disableSubmit: undefined })
+    return this.setState({ disableSubmit: undefined, error: null })
   }
 
   render() { 
@@ -56,7 +56,7 @@ class ResetPasswordForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-          {error && <p className='red'>There was an error!</p>}
+    {error && <p className='red'>{error.message}</p>}
         </div>
         <div className='password'>
           <label htmlFor='ResetPasswordForm__password'>

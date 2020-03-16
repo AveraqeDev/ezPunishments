@@ -6,11 +6,18 @@ import TokenService from '../../services/token-service';
 
 class Header extends Component {
   
+  static defaultProps = {
+    history: {
+      push: () => {}
+    }
+  }
+
   static contextType = UserContext;
 
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
     this.context.clearUser();
+    this.props.history.push('/');
   }
 
   renderLogoutLink() {

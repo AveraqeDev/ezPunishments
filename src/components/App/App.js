@@ -11,6 +11,8 @@ import HomePage from '../../routes/HomePage/HomePage';
 
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
 import LoginPage from '../../routes/LoginPage/LoginPage';
+import ForgotPasswordPage from '../../routes/ForgotPasswordPage/ForgotPasswordPage';
+import ResetPasswordPage from '../../routes/ResetPasswordPage/ResetPasswordPage';
 
 import ProfilePage from '../../routes/ProfilePage/ProfilePage';
 
@@ -55,6 +57,14 @@ class App extends Component {
             <PublicOnlyRoute
               path='/register'
               component={RegistrationPage}
+            />
+            <PublicOnlyRoute
+              path='/forgot-password'
+              component={ForgotPasswordPage}
+            />
+            <PublicOnlyRoute
+              path='/reset-password/:userId/:token'
+              component={ResetPasswordPage}
             />
 
             <PrivateRoute
