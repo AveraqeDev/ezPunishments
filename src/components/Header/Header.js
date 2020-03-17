@@ -81,9 +81,9 @@ class Header extends Component {
         </li>
         <li>
         <Link
-            to='/'
+            to='/punish'
           >
-            Moderation
+            Punish
           </Link>
         </li>
       </ul>
