@@ -23,6 +23,7 @@ class Header extends Component {
   static contextType = UserContext;
 
   handleLogoutClick = () => {
+    this.setState({navOpen: false});
     TokenService.clearAuthToken();
     this.context.clearUser();
     this.props.history.push('/');
@@ -77,11 +78,11 @@ class Header extends Component {
            to='/'>
             eZPunishments
             {' '}
-            <FontAwesomeIcon icon='gavel' />
+            <FontAwesomeIcon className='Header__logo_icon' icon='gavel' />
           </Link>
         </h1>
         <Burger open={navOpen} setOpen={this.setOpen} />
-        <Menu open={navOpen} />
+        <Menu open={navOpen} setOpen={this.setOpen} onLogout={this.handleLogoutClick} isStaff={this.context.isStaff} isAdmin={this.context.isAdmin} />
       </nav>
      );
   }

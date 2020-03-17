@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #EFFFFA;
+  background: #2C2C4D;
   height: 100%;
   text-align: right;
   padding: 2rem;
@@ -19,13 +19,20 @@
   padding: 2rem 0;
   font-weight: bold;
   letter-spacing: 0.5rem;
-  color: #0D0C1D;
+  color: #EFEFEF;
   text-decoration: none;
   transition: color 0.3s linear;
 }
 
 .Menu__link:hover {
-  color: #343078;
+  color: #E865FF;
+  opacity: 0.8;
+}
+
+.logout {
+  text-align: right;
+  background: transparent;
+  border: none;
 }
 
 @media screen and (max-width: 576px) {

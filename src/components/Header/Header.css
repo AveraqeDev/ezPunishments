@@ -4,9 +4,22 @@
   text-align: center;
   padding: 0 5px;
   border-bottom: 2px solid white;
-  background: #0D0C1D;
+  background: #0D0D20;
 }
 
 .Header__logo {
   padding-left: 1.5rem;
+  color: #EFEFEF;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s linear;
+}
+
+.Header__logo:hover {
+  color: #E865FF;
+  opacity: 0.8;
+}
+
+.Header__logo_icon {
+  margin-left: 10px;
 }

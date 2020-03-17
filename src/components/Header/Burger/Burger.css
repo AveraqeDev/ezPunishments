@@ -18,10 +18,14 @@
   outline: none;
 }
 
+.Burger:hover {
+  opacity: 0.8;
+}
+
 .Burger > div {
   width: 2rem;
   height: 0.25rem;
-  background: #EFFFFA;
+  background: #EFEFEF;
   border-radius: 10px;
   transition: all 0.3s linear;
   position: relative;
@@ -29,17 +33,14 @@
 }
 
 .burger_open:first-child {
-  background: #0D0C1D;
   transform: rotate(45deg);
 }
 
 .burger_open:nth-child(2) {
-  background: #0D0C1D;
   opacity: 0;
   transform: translateX(20px);
 }
 
 .burger_open:nth-child(3) {
-  background: #0D0C1D;
   transform: rotate(-45deg);
 }
