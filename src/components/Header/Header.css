@@ -1,0 +1,12 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0 5px;
+  border-bottom: 2px solid white;
+  background: #0D0C1D;
+}
+
+.Header__logo {
+  padding-left: 1.5rem;
+}

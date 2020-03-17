@@ -4,12 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UserContext from '../../contexts/UserContext';
 import TokenService from '../../services/token-service';
 
+import './Header.css';
+import Burger from './Burger/Burger';
+import Menu from './Menu/Menu';
+
 class Header extends Component {
   
   static defaultProps = {
     history: {
       push: () => {}
     }
+  }
+
+  state = {
+    navOpen: false
   }
 
   static contextType = UserContext;
@@ -22,7 +30,7 @@ class Header extends Component {
 
   renderLogoutLink() {
     return (
-      <div className='Header__logged-in'>
+      <div className='Header__log'>
         <Link
           to='/profile'
         >
@@ -55,55 +63,25 @@ class Header extends Component {
     )
   }
 
-  renderNav() {
-    return (
-      <ul className='Header__nav'>
-        <li>
-          <Link
-            to='/'
-          >
-            Home
-          </Link>
-        </li>
-        <li>
-        <Link
-            to='/punishments'
-          >
-            Punishments
-          </Link>
-        </li>
-        <li>
-        <Link
-            to='/users'
-          >
-            Users
-          </Link>
-        </li>
-        <li>
-        <Link
-            to='/punish'
-          >
-            Punish
-          </Link>
-        </li>
-      </ul>
-    )
+  setOpen = (navOpen) => {
+    this.setState({navOpen});
   }
 
   render() { 
+    const { navOpen } = this.state;
     return ( 
       <nav className='Header'>
         <h1>
-          <Link to='/'>
+          <Link
+           className='Header__logo'
+           to='/'>
             eZPunishments
             {' '}
             <FontAwesomeIcon icon='gavel' />
           </Link>
         </h1>
-        {this.renderNav()}
-        {this.context.user.id !== -1
-          ? this.renderLogoutLink()
-          : this.renderLoginLink()}
+        <Burger open={navOpen} setOpen={this.setOpen} />
+        <Menu open={navOpen} />
       </nav>
      );
   }

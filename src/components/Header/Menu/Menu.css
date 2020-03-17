@@ -1,0 +1,44 @@
+.Menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #EFFFFA;
+  height: 100%;
+  text-align: right;
+  padding: 2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+}
+
+.Menu__link {
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding: 2rem 0;
+  font-weight: bold;
+  letter-spacing: 0.5rem;
+  color: #0D0C1D;
+  text-decoration: none;
+  transition: color 0.3s linear;
+}
+
+.Menu__link:hover {
+  color: #343078;
+}
+
+@media screen and (max-width: 576px) {
+  .Menu {
+    width: 100%;
+  }
+
+  .Menu__link {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
+.nav_open {
+  transform: translateX(0);
+}
