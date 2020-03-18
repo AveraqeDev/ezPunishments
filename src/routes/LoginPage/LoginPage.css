@@ -1,0 +1,15 @@
+.LoginPage {
+  text-align: center;
+}
+
+.LoginPage__logo {
+  color: #1D1D39;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.LoginPage > p {
+  color: #545477;
+  font-size: 18px;
+}

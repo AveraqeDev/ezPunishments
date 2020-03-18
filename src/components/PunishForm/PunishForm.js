@@ -4,6 +4,8 @@ import { Button, Input, Textarea, Required } from '../Utils/Utils';
 import PunishmentApiService from '../../services/punishment-api-service';
 import UserContext from '../../contexts/UserContext';
 
+import './PunishForm.css';
+
 class PunishForm extends Component {
   static defaultProps = {
     user: '',
@@ -64,7 +66,7 @@ class PunishForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-          {error && <p className='red'>{error}</p>}
+          {error && <p className='red'>{error.message}</p>}
         </div>
         <div className='name'>
           <label htmlFor='PunishForm__name'>
@@ -119,7 +121,7 @@ class PunishForm extends Component {
           <label htmlFor='PunishForm__length'>
             Length <Required />
           </label>
-          <Input
+          <input
             name='length'
             type='number'
             required
@@ -127,7 +129,7 @@ class PunishForm extends Component {
             placeholder='1'
             disabled={this.state.type === 'Permanent' ? 'disabled' : undefined}
           >
-          </Input>
+          </input>
           <select name='type' className='PunishForm__length-type' onChange={this.handleTypeChange}>
             <option value='h'>Hours</option>
             <option value='d'>Days</option>

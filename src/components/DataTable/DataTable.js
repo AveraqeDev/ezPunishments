@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import Cell from './Cell';
 
+import './DataTable.css';
+
 class DataTable extends Component {
+
   renderHeadingRow = (_cell, cellIndex) => {
     const { headings } = this.props;
-    
+
     return(
       <Cell 
         key={`header-${cellIndex}`}
@@ -15,8 +18,7 @@ class DataTable extends Component {
   }
 
   renderRow = (_row, rowIndex) => {
-    const {rows} = this.props;
-
+    const { rows } = this.props;
     return (
       <tr key={`row-${rowIndex}`}>
         {rows[rowIndex].map((_cell, cellIndex) => {
@@ -43,10 +45,14 @@ class DataTable extends Component {
     const tbodyMarkup = rows.map(this.renderRow);
 
     return (
-      <table className='Table'>
-        <thead>{theadMarkup}</thead>
-        <tbody>{tbodyMarkup}</tbody>
-      </table>
+      <div className='DataTable'>
+        <div className='ScrollContainer'>
+          <table className='Table' ref={this.tableRef}>
+            <thead>{theadMarkup}</thead>
+            <tbody>{tbodyMarkup}</tbody>
+          </table>
+        </div>
+      </div>
     )
   }
 }

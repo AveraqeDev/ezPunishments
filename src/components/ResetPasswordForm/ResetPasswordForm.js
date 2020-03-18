@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button } from '../Utils/Utils';
+import { Input, Button, Required } from '../Utils/Utils';
 
 import UserApiService from '../../services/user-api-service';
 
@@ -60,7 +60,7 @@ class ResetPasswordForm extends Component {
         </div>
         <div className='password'>
           <label htmlFor='ResetPasswordForm__password'>
-            New Password
+            New Password <Required/>
           </label>
           <Input
             required
@@ -72,7 +72,7 @@ class ResetPasswordForm extends Component {
         </div>
         <div className='confirm-password'>
           <label htmlFor='ResetPasswordForm__confirm-password'>
-            Confirm New Password
+            Confirm New Password <Required/>
           </label>
           <Input
             required

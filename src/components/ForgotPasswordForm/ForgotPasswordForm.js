@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button } from '../Utils/Utils';
+import { Input, Button, Required } from '../Utils/Utils';
 
 import UserApiService from '../../services/user-api-service';
 
@@ -43,7 +43,7 @@ class ForgotPasswordForm extends Component {
         </div>
         <div className='username'>
           <label htmlFor='ForgotPasswordForm__username'>
-            Username
+            Username <Required/>
           </label>
           <Input
             required

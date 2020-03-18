@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Section } from '../../components/Utils/Utils';
 import PunishForm from '../../components/PunishForm/PunishForm';
 
+import './PunishPage.css';
+
 class PunishPage extends Component {
   static defaultProps = {
     match: {

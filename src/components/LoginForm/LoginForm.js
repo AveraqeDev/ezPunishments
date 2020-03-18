@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Input } from '../Utils/Utils';
+import { Button, Input, Required } from '../Utils/Utils';
 import AuthApiService from '../../services/auth-api-service';
+
+import './LoginForm.css';
 
 class LoginForm extends Component {
   static defaultProps = {
@@ -39,11 +41,11 @@ class LoginForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-          {error && <p className='red'>There was an error!</p>}
+    {error && <p className='red'>{error.message}</p>}
         </div>
         <div className='username'>
           <label htmlFor='LoginForm__username'>
-            Username
+            Username <Required/>
           </label>
           <Input
             required
@@ -53,7 +55,7 @@ class LoginForm extends Component {
         </div>
         <div className='password'>
           <label htmlFor='LoginForm__password'>
-            Password
+            Password <Required/> <Link className='LoginForm__forgot' to='/forgot-password'>Forgot?</Link>
           </label>
           <Input
             required
@@ -65,10 +67,7 @@ class LoginForm extends Component {
         <Button className='LoginForm__login' type='submit'>
           Login
         </Button>
-        <p>Forgot Password?</p>
-        <Link className='LoginForm__forgot' to='/forgot-password'>Reset Password</Link>
-        <p>Don't have an account?</p>
-        <Link className='LoginForm__register' to='/register'>Sign up</Link>
+        <p className='LoginForm__not_member'>Not a member? <Link className='LoginForm__register' to='/register'>Sign up now</Link></p>
       </form>
     );
   }

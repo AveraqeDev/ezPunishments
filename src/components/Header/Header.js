@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UserContext from '../../contexts/UserContext';
 import TokenService from '../../services/token-service';
@@ -74,22 +74,27 @@ class Header extends Component {
 
   render() { 
     const { navOpen } = this.state;
-    return ( 
-      <nav className='Header'>
-        <h1>
-          <Link
-           className='Header__logo'
-           to='/'>
-            eZPunishments
-            {' '}
-            <FontAwesomeIcon className='Header__logo_icon' icon='gavel' />
-          </Link>
-        </h1>
-        <Burger open={navOpen} setOpen={this.setOpen} />
-        <Menu open={navOpen} setOpen={this.setOpen} onLogout={this.handleLogoutClick} isStaff={this.context.isStaff} isAdmin={this.context.isAdmin} />
-      </nav>
-     );
+    const { pathname } = this.props.location;
+    if(pathname === '/login' || pathname === '/register' || pathname === '/forgot-password' || pathname.includes('reset-password')) {
+      return null;
+    } else {
+      return ( 
+        <nav className='Header'>
+          <h1>
+            <Link
+            className='Header__logo'
+            to='/'>
+              eZPunishments
+              {' '}
+              <FontAwesomeIcon className='Header__logo_icon' icon='gavel' />
+            </Link>
+          </h1>
+          <Burger open={navOpen} setOpen={this.setOpen} />
+          <Menu open={navOpen} setOpen={this.setOpen} onLogout={this.handleLogoutClick} isStaff={this.context.isStaff} isAdmin={this.context.isAdmin} />
+        </nav>
+      );
+    }
   }
 }
  
-export default Header;
+export default withRouter(Header);

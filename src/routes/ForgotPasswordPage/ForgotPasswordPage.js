@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Section } from '../../components/Utils/Utils';
 
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import ForgotPasswordForm from '../../components/ForgotPasswordForm/ForgotPasswordForm';
+
+import './ForgotPasswordPage.css';
 
 class ForgotPasswordPage extends Component {
 
@@ -17,11 +22,20 @@ class ForgotPasswordPage extends Component {
     const { success } = this.state;
     return ( 
       <Section className='ForgotPasswordPage'>
-        <h2>Forgot Password</h2>  
-        <p>It happens to the best of us</p>
+        <h1>
+          <Link
+          className='ForgotPasswordPage__logo'
+          to='/'>
+            eZPunishments
+            {' '}
+            <FontAwesomeIcon className='ForgotPasswordPage__logo_icon' icon='gavel' />
+          </Link>
+        </h1>
+        <p className='ForgotPasswordPage__title'>Forgot Password</p>  
+        <p className='ForgotPasswordPage__tagline'>It happens to the best of us</p>
         { success
             ? (<>
-                <h3>Email sent!</h3>
+                <h2>Email sent!</h2>
                 <p>Please check your email for a link to reset your password!</p>
                </>
               )

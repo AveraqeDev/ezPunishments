@@ -3,6 +3,8 @@ import { Button, Input, Required } from '../Utils/Utils';
 import AuthApiService from '../../services/auth-api-service';
 import { Link } from 'react-router-dom';
 
+import './RegistrationForm.css';
+
 class RegistrationForm extends Component {
   static defaultProps = {
     onRegistrationSuccess: () => {}
@@ -22,9 +24,9 @@ class RegistrationForm extends Component {
        user_name: user_name.value,
        password: password.value
      })
-      .then(user => {
+      .then(() => {
         email.value = '';
-        user_name.valie = '';
+        user_name.value = '';
         password.value = '';
         this.props.onRegistrationSuccess();
       })
@@ -41,7 +43,7 @@ class RegistrationForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-          {error && <p className='red'>{error}</p>}
+          {error && <p className='red'>{error.message}</p>}
         </div>
         <div className='email'>
           <label htmlFor='RegistrationForm__email'>
@@ -79,8 +81,7 @@ class RegistrationForm extends Component {
         <Button className='RegistrationForm__register' type='submit'>
           Register
         </Button>
-        <p>Already have an account?</p>
-        <Link className='RegistrationForm__login' to='/login'>Login</Link>
+        <p className='RegistrationForm__existing_account'>Already have an account? <Link className='RegistrationForm__login' to='/login'>Login</Link></p>
       </form>
      );
   }
