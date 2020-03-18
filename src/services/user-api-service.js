@@ -1,8 +1,13 @@
+import TokenService from './token-service';
 import config from '../config';
 
 const UserApiService = {
   getAllUsers() {
-    return fetch(`${config.API_ENDPOINT}/users`)
+    return fetch(`${config.API_ENDPOINT}/users`, {
+      headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
       .then(res => 
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
@@ -11,7 +16,11 @@ const UserApiService = {
   },
 
   getById(id) {
-    return fetch(`${config.API_ENDPOINT}/users/${id}`)
+    return fetch(`${config.API_ENDPOINT}/users/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
       .then(res => 
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
@@ -23,6 +32,7 @@ const UserApiService = {
     return fetch(`${config.API_ENDPOINT}/users/${id}`, {
       method: 'PATCH',
       headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(newUserFields)

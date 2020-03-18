@@ -1,9 +1,13 @@
-// import TokenService from './token-service';
+import TokenService from './token-service';
 import config from '../config';
 
 const PunishmentApiService = {
   getPunishment(punishmentId) {
-    return fetch(`${config.API_ENDPOINT}/punishments/${punishmentId}`)
+    return fetch(`${config.API_ENDPOINT}/punishments/${punishmentId}`, {
+      headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
       .then(res =>
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
@@ -12,7 +16,11 @@ const PunishmentApiService = {
   },
 
   getUserPunishments(user) {
-    return fetch(`${config.API_ENDPOINT}/users/${user.id}/punishments`)
+    return fetch(`${config.API_ENDPOINT}/users/${user.id}/punishments`, {
+      headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
       .then(res =>
         (!res.ok)
           ? res.json().then(e => Promise.reject(e))
@@ -21,7 +29,11 @@ const PunishmentApiService = {
   },
 
   getPunishmentsByUser(user) {
-    return fetch(`${config.API_ENDPOINT}/users/${user.id}/punishes`)
+    return fetch(`${config.API_ENDPOINT}/users/${user.id}/punishes`, {
+      headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
     .then(res =>
       (!res.ok)
         ? res.json().then(e => Promise.reject(e))
@@ -51,6 +63,7 @@ const PunishmentApiService = {
     return fetch(`${config.API_ENDPOINT}/punishments`, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(punishment)
@@ -66,6 +79,7 @@ const PunishmentApiService = {
     return fetch(`${config.API_ENDPOINT}/punishments/${id}`, {
       method: 'PATCH',
       headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(newPunishmentFields)

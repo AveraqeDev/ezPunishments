@@ -3,6 +3,7 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 import UserContext from '../../contexts/UserContext';
 import TokenService from '../../services/token-service';
 import { Section } from '../../components/Utils/Utils';
+import AuthApiService from '../../services/auth-api-service';
 
 class LoginPage extends Component {
   static defaultProps = {
@@ -19,6 +20,9 @@ class LoginPage extends Component {
     const destination = (location.state || {}).from ||'/';
 
     TokenService.saveAuthToken(token);
+    TokenService.queueCallbackBeforeExpiry(() => {
+      AuthApiService.postRefreshToken();
+    });
     this.context.setUser(TokenService.parseAuthToken(token));
 
     history.push(destination);
