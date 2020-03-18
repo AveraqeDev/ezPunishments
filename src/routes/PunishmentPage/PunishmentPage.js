@@ -211,7 +211,7 @@ class PunishmentPage extends Component {
               <p><strong>Punished By:</strong> {punished_by}</p>
               <p><strong>Removed By:</strong> {removed_by ? removed_by : 'N/A'}</p>
               <p><strong>Active:</strong> {active ? 'Yes' : 'No'}</p>
-              <p><strong>Expires:</strong> {moment(expires).format('YYYY-MM-DD h:mm:ss')}</p>
+              <p><strong>Expires:</strong> {expires ? moment(expires).format('YYYY-MM-DD h:mm:ss') : 'Never'}</p>
               <p><strong>Date Punished:</strong> {moment(date_punished).format('YYYY-MM-DD h:mm:ss')}</p>
               <p><strong>Updated:</strong> {updated ? moment(updated).format('YYYY-MM-DD h:mm:ss') : 'N/A'}</p>
             </div>
