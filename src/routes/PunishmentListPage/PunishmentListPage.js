@@ -35,7 +35,7 @@ class PunishmentListPage extends Component {
       punishment.punished_by,
       (punishment.active ? 'Yes' : 'No'),
       (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never'),
-      (<Link className='PunishmentListPage__button' to={`/punishments/${punishment.id}`}>View Punishment</Link>)
+      (<Link className='DataTable__button' to={`/punishments/${punishment.id}`}>View</Link>)
     ]);
     return(
       <DataTable headings={headings} rows={rows} />

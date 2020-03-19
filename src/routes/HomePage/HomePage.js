@@ -4,6 +4,7 @@ import DataTable from '../../components/DataTable/DataTable';
 import PunishmentApiService from '../../services/punishment-api-service';
 import TokenService from '../../services/token-service';
 import Modal from '../../components/Modal/Modal';
+import Header from '../../components/Header/Header';
 
 import './HomePage.css';
 
@@ -29,23 +30,31 @@ class HomePage extends Component {
   }
 
   renderPunishments() {
-    const headings = [
-      'Username',
-      'Punished By',
-      'Reason',
-      'Punished On',
-      'Expires On'
-    ];
-    const rows = this.state.punishments.map(punishment => [
-      punishment.name,
-      punishment.punished_by,
-      punishment.reason,
-      new Date(punishment.date_punished).toLocaleDateString(),
-      (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never')
-    ]);
-    return (
-      <DataTable headings={headings} rows={rows} />
-    );
+    const { error } = this.state;
+    let content;
+    if(error) {
+      content = <p className='no-data'>{error.message}</p>
+    } else if(!this.state.punishments) {
+      content = <div className='loading' />
+    } else {
+      const headings = [
+        'Username',
+        'Punished By',
+        'Reason',
+        'Punished On',
+        'Expires On'
+      ];
+      const rows = this.state.punishments.map(punishment => [
+        punishment.name,
+        punishment.punished_by,
+        punishment.reason,
+        new Date(punishment.date_punished).toLocaleDateString(),
+        (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never')
+      ]);
+      content = <DataTable headings={headings} rows={rows} />
+    }
+
+    return content;
   }
 
   handleOpenModal = () => {
@@ -78,10 +87,8 @@ class HomePage extends Component {
             </Modal>
         }
         <Section className='HomePage'>
-          <h2>Recent Punishments</h2>
-          {error 
-            ? <p className='red'>There was an error!</p>
-            : this.renderPunishments()}
+          <Header title='Recent Punishments' />
+          {this.renderPunishments()}
         </Section>
       </>
     );

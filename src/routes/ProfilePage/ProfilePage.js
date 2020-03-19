@@ -3,6 +3,8 @@ import { Section } from '../../components/Utils/Utils';
 import UserContext from '../../contexts/UserContext';
 import DataTable from '../../components/DataTable/DataTable';
 
+import Header from '../../components/Header/Header';
+
 import './ProfilePage.css';
 
 class ProfilePage extends Component {
@@ -16,7 +18,7 @@ class ProfilePage extends Component {
 
   renderPunishments() {
     const { punishments } = this.context;
-    let content = <p>No Punishments Found</p>;
+    let content = <div className='loading' />;
     let headings = [
       'ID',
       'Punished_by',
@@ -35,6 +37,8 @@ class ProfilePage extends Component {
     ]);
     if(rows.length > 0) {
       content = <DataTable headings={headings} rows={rows} />
+    } else {
+      content = <p className='no-data'>No punishments found</p>
     }
     return (
       content
@@ -45,10 +49,10 @@ class ProfilePage extends Component {
     return (
       <>
         <div className='ProfilePage__heading'>
-          <h2>{this.context.user.username}</h2>
+          <h1>{`${this.context.user.username}'s Profile`}</h1>
         </div>
         <div className='ProfilePage__body'>
-          <h3>Punishment History</h3>
+          <Header title='Punishment History' />
           {this.renderPunishments()}
         </div>
       </>
@@ -59,7 +63,7 @@ class ProfilePage extends Component {
     const { error, user } = this.context;
     let content;
     if(error) {
-      content = <p className='red'>There was an error</p>
+      content = <p className='red'>{error.message}</p>
     } else if(!user) {
       content = <div className='loading' />
     } else {

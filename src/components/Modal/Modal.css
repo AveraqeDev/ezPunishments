@@ -31,41 +31,15 @@
   color: white;
 }
 
-.Modal-footer {
-  background: #2C2C4D;
-  height: 35px;
-  padding: 15px;
-}
-
 .Modal-close-btn {
   color: white;
   cursor: pointer;
   float: right;
   font-size: 30px;
-  margin: 0;
 }
 
 .Modal-close-btn:hover {
-  color: black;
-}
-
-.Modal-cancel-btn, .Modal-confirm-btn {
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  outline: none;
-  padding: 10px;
-}
-
-.Modal-cancel-btn {
-  background-color: #b71c1c;
-  float: left;
-}
-
-.Modal-confirm-btn {
-  background-color: #1b5e20;
-  float: right;
+  color: #E865FF;
 }
 
 @media screen and (max-width: 768px) {

@@ -18,8 +18,8 @@
   outline: none;
 }
 
-.Burger:hover {
-  opacity: 0.8;
+.Burger:hover > div {
+  background: #E865FF;
 }
 
 .Burger > div {

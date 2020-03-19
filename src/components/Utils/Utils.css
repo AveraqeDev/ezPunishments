@@ -24,11 +24,27 @@
 
 .Button {
   order: 1px solid #aaa;
-  background-color: #eee;
+  background: transparent linear-gradient(105deg, #7F00FF 0%, #E100FF 100%);
+  border: none;
+  border-radius: 5px;
+  color: #EFEFEF;
+  cursor: pointer;
+  margin: 5px;
   font-size: 1.1em;
-  border-radius: 4px;
-  padding: 8px 12px;
   font-weight: bold;
+  padding: 8px 12px;
+}
+
+.Button:hover {
+  opacity: .8;
+}
+
+.Button:disabled {
+  opacity: .3;
+}
+
+.Button:disabled:hover {
+  cursor: not-allowed;
 }
 
 .Required {

@@ -25,6 +25,10 @@ tr:nth-of-type(even) {
   background: #2C2C4D;
 }
 
+.Cell:last-child {
+  text-align: center;
+}
+
 .Cell-header {
   background: #0D0D20;
   color: #EFEFEF;

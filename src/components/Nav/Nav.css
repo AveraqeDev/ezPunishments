@@ -1,0 +1,24 @@
+.Nav {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  padding: 0 5px;
+  background: #0D0D20;
+}
+
+.Nav__logo {
+  padding-left: 1.5rem;
+  color: #EFEFEF;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s linear;
+}
+
+.Nav__logo:hover {
+  color: #E865FF;
+  opacity: 0.8;
+}
+
+.Nav__logo_icon {
+  margin-left: 10px;
+}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '../Utils/Utils';
 import './Modal.css';
 
 const Modal = (props) => {
@@ -16,16 +15,6 @@ const Modal = (props) => {
         <div className='Modal-body'>
             {props.children}
         </div>
-        {
-          props.confirm
-            ? (
-                <div className='Modal-footer'>
-                  <Button className='Modal-cancel-btn' onClick={props.close}>Cancel</Button>
-                  <Button className='Modal-confirm-btn' onClick={props.confirm}>Confirm</Button>
-                </div>
-              )
-            : null
-        }
       </div>
   )
 }

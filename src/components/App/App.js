@@ -6,7 +6,7 @@ import PrivateRoute from '../Utils/PrivateRoute';
 import StaffOnlyRoute from '../Utils/StaffOnlyRoute';
 import AdminOnlyRoute from '../Utils/AdminOnlyRoute';
 
-import Header from '../Header/Header';
+import Nav from '../Nav/Nav';
 import HomePage from '../../routes/HomePage/HomePage';
 
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
@@ -43,7 +43,7 @@ class App extends Component {
     return (
       <div className='App'>
         <header className='App__header'>
-          <Header />
+          <Nav />
         </header>
         <main className='App__main'>
           {this.state.error && <p className='red'>{this.state.error.message}</p>}

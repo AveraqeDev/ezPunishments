@@ -17,6 +17,8 @@ class ForgotPasswordForm extends Component {
     e.preventDefault();
     this.setState({error: null});
 
+    this.props.handleSubmit();
+
     const { username } = e.target;
 
     UserApiService.resetPassword(username.value)

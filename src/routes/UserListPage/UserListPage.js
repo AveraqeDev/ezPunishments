@@ -6,6 +6,7 @@ import { Section } from '../../components/Utils/Utils';
 import UserApiService from '../../services/user-api-service';
 
 import './UserListPage.css';
+import Header from '../../components/Header/Header';
 
 class UserListPage extends Component {
   state = { 
@@ -20,7 +21,7 @@ class UserListPage extends Component {
       .catch(error => this.setState({ error }));
    }
 
-   renderPunishmentsTable() {
+   renderPunishments() {
     const headings = [
       'ID',
       'Email',
@@ -34,22 +35,47 @@ class UserListPage extends Component {
       user.user_name,
       user.user_role,
       new Date(user.date_created).toLocaleString(),
-      (<Link className='UserListPage__button' to={`/users/${user.id}`}>View User</Link>)
+      (<Link className='DataTable__button' to={`/users/${user.id}`}>View</Link>)
     ]);
     return(
       <DataTable headings={headings} rows={rows} />
     )
   }
 
-  render() { 
+  renderUsers() {
     const { error } = this.state;
+    let content;
+    if(error) {
+      content = <p className='no-data'>{error.message}</p>
+    } else if(!this.state.users) {
+      content = <div className='loading' />
+    } else {
+      const headings = [
+        'ID',
+        'Email',
+        'Username',
+        'Role',
+        'Date Created'
+      ];
+      const rows = this.state.users.map(user => [
+        user.id,
+        user.email,
+        user.user_name,
+        user.user_role,
+        new Date(user.date_created).toLocaleString(),
+        (<Link className='DataTable__button' to={`/users/${user.id}`}>View</Link>)
+      ]);
+      content = <DataTable headings={headings} rows={rows} />
+    }
+
+    return content;
+  }
+
+  render() { 
     return ( 
       <Section className='UserListPage'>
-        <h2>Users</h2>
-        {error
-          ? <p className='red'>There was an error, please try again</p>
-          : this.renderPunishmentsTable()
-        }
+        <Header title='Users' />
+        {this.renderUsers()}
       </Section>
     );
   }
