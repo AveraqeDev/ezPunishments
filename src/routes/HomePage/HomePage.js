@@ -4,6 +4,7 @@ import DataTable from '../../components/DataTable/DataTable';
 import PunishmentApiService from '../../services/punishment-api-service';
 import TokenService from '../../services/token-service';
 
+import Table from '../../components/Table/Table';
 import Modal from '../../components/Modal/Modal';
 
 import './HomePage.css';
@@ -29,7 +30,7 @@ class HomePage extends Component {
     }, 2000);
   }
 
-  renderRecentPunishments() {
+  renderPunishments() {
     const headings = [
       'Username',
       'Punished By',
@@ -82,7 +83,7 @@ class HomePage extends Component {
           <h2>Recent Punishments</h2>
           {error 
             ? <p className='red'>There was an error!</p>
-            : this.renderRecentPunishments()}
+            : this.renderPunishments()}
         </Section>
       </>
     );
