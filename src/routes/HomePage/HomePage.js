@@ -4,14 +4,15 @@ import DataTable from '../../components/DataTable/DataTable';
 import PunishmentApiService from '../../services/punishment-api-service';
 import TokenService from '../../services/token-service';
 
-import PopUp from '../../components/PopUp/PopUp';
+import Modal from '../../components/Modal/Modal';
 
 import './HomePage.css';
 
 class HomePage extends Component {
+
   state = {
     punishments: [],
-    popup: false,
+    showModal: false,
     error: null
   }
 
@@ -22,7 +23,9 @@ class HomePage extends Component {
       .catch(error => this.setState({error}));
 
     setTimeout(() => {
-      this.showPopUp();
+      this.setState({
+        showModal: true
+      });
     }, 2000);
   }
 
@@ -46,12 +49,16 @@ class HomePage extends Component {
     );
   }
 
-  showPopUp = () => {
-    this.setState({popup: true});
+  handleOpenModal = () => {
+    this.setState({
+      showModal: true
+    })
   }
 
-  hidePopUp = () => {
-    this.setState({popup: false});
+  handleCloseModal = () => {
+    this.setState({
+      showModal: false
+    })
   }
 
   render() { 
@@ -60,12 +67,17 @@ class HomePage extends Component {
       <>
         {TokenService.hasAuthToken()
           ? null
-          : <PopUp className='PopUp' show={this.state.popup} handleClose={this.hidePopUp}>
-              <h2>Welcome!</h2>
+          : <Modal
+              className='Modal'
+              header='Welcome!'
+              show={this.state.showModal}
+              close={this.handleCloseModal}
+            >
               <p>Here you are able to easily manage the players, and their punishments, on your Minecraft Server!</p>
-              <p>To get started you must login with the test user(`admin`) and password(`admin`).</p> 
+              <p>To get started you must login with the test user(`admin`) and password(`admin`).</p>
               <p>Once logged in, you can navigate to the `Punishments` page to view a list of all punishments executed, to the `Users` page to view a list of registered users, or to the `Punish` page to execute a punishment.</p>
-            </PopUp>}
+            </Modal>
+        }
         <Section className='HomePage'>
           <h2>Recent Punishments</h2>
           {error 

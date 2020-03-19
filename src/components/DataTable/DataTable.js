@@ -47,7 +47,7 @@ class DataTable extends Component {
     return (
       <div className='DataTable'>
         <div className='ScrollContainer'>
-          <table className='Table' ref={this.tableRef}>
+          <table className='Table'>
             <thead>{theadMarkup}</thead>
             <tbody>{tbodyMarkup}</tbody>
           </table>

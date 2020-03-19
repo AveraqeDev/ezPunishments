@@ -2,6 +2,7 @@
   border-spacing: 0px;
   box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
   width: 100%;
+  border-collapse: collapse;
 }
 
 .DataTable {
@@ -10,12 +11,51 @@
 }
 
 .Cell {
-  border: 1px solid #f4f6f8;
-  padding: 4px;
+  border: 1px solid #ccc;
+  padding: 6px;
   text-align: left;
-  vertical-align: top;
+}
+
+.Cell-header {
+  background: #333;
+  color: white;
+  font-weight: bold;
 }
 
 .ScrollContainer {
   overflow-x: auto;
+}
+
+@media 
+only screen and (max-width: 760px), 
+(min-device-width: 768px) and (max-device-width: 1024px) {
+  table, thead, tbody, th ,td, tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
 }

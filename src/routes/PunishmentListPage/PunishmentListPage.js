@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PunishmentApiService from '../../services/punishment-api-service';
-import { Section, Button } from '../../components/Utils/Utils';
+import { Section } from '../../components/Utils/Utils';
 import DataTable from '../../components/DataTable/DataTable';
 
 import './PunishmentListPage.css';

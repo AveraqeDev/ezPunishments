@@ -1,3 +1,7 @@
 .HomePage > h2 {
   padding-left: 5%;
 }
+
+.hidden {
+  display: none;
+}
