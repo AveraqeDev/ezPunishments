@@ -7,6 +7,8 @@ import UserContext from '../../contexts/UserContext';
 
 import DataTable from '../../components/DataTable/DataTable';
 
+import './UserPage.css';
+
 class UserPage extends Component {
   state = {
     user: {},
@@ -55,7 +57,8 @@ class UserPage extends Component {
       punishment.reason,
       (punishment.active ? 'Yes' : 'No'),
       new Date(punishment.date_punished).toLocaleDateString(),
-      new Date(punishment.expires).toLocaleDateString()
+      (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never'),
+      (<Link className='PunishmentListPage__button' to={`/punishments/${punishment.id}`}>View Punishment</Link>)
     ]);
     if(rows.length > 0) {
       content = <DataTable headings={headings} rows={rows} />
@@ -87,7 +90,7 @@ class UserPage extends Component {
       <>
         <div className='UserPage__user_heading'>
           <h2>{this.state.user.user_name}</h2>
-          <div className='IserPage__user_heading-controls'>
+          <div className='UserPage__user_heading-controls'>
             {this.context.isStaff() && this.state.user.user_role === 'member'
               ? <Link to={`/punish/${this.state.user.user_name}`}>Punish Player</Link>
               : ''}

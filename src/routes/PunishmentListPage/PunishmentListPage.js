@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PunishmentApiService from '../../services/punishment-api-service';
-import { Section } from '../../components/Utils/Utils';
+import { Section, Button } from '../../components/Utils/Utils';
 import DataTable from '../../components/DataTable/DataTable';
+
+import './PunishmentListPage.css';
 
 class PunishmentListPage extends Component {
   state = {
@@ -32,7 +34,7 @@ class PunishmentListPage extends Component {
       punishment.reason,
       punishment.punished_by,
       (punishment.active ? 'Yes' : 'No'),
-      new Date(punishment.expires).toLocaleDateString(),
+      (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never'),
       (<Link className='PunishmentListPage__button' to={`/punishments/${punishment.id}`}>View Punishment</Link>)
     ]);
     return(

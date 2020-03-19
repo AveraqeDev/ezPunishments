@@ -1,8 +1,5 @@
 import config from '../config';
 
-let _timeoudId;
-const _TEN_SECONDS_IN_MS = 10000;
-
 const TokenService = {
   saveAuthToken(token) {
     window.sessionStorage.setItem(config.TOKEN_KEY, token);
@@ -32,36 +29,8 @@ const TokenService = {
     return {
       id: payload.user_id,
       username: payload.sub,
-      role: payload.role,
-      exp: payload.exp
+      role: payload.role
     }
-  },
-
-  _getMsUntilExpiry(payload) {
-    /*
-      payload is from the JWT
-      the `exp` value is in seconds, need to convert to ms, so * 1000
-      calculates the difference between now and when the JWT will expire
-    */
-    return (payload.exp * 1000) - Date.now();
-  },
-
-  queueCallbackBeforeExpiry(callback) {
-    // get the number of ms from now until the token expires
-    const msUntilExpiry = TokenService._getMsUntilExpiry(
-      TokenService.parseAuthToken(TokenService.getAuthToken())
-    );
-
-    /*
-      queue a callback that will happen 10 seconds before the token expires
-      the callback is passed in as an argument so could be anything,
-        in this app, the callback is for calling the refresh endpoint
-    */
-    _timeoudId = setTimeout(callback, msUntilExpiry - _TEN_SECONDS_IN_MS);
-  },
-
-  clearCallbackBeforeExpiry() {
-    clearTimeout(_timeoudId);
   }
 };
 

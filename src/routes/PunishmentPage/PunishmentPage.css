@@ -1,8 +1,8 @@
-.length > label {
-  display: block;
+.PunishmentPage {
+  text-align: center;
 }
 
-#PunishForm__length {
+#PunishmentPage__expires {
   border: 1px solid #ddd;
   font-size: 1.1em;
   margin-bottom: 10px;
@@ -15,11 +15,11 @@
   border-radius: 4px;
 }
 
-#PunishForm__length::placeholder {
+#PunishmentPage__expires::placeholder {
   color: #ccc;
 }
 
-.PunishForm__length-type {
+.PunishmentPage__expires-type {
   display: block;
   font-size: 16px;
   font-family: sans-serif;
@@ -34,22 +34,23 @@
   background-color: #fff;
 }
 
-.PunishForm__length-type:hover {
+.PunishmentPage__expires-type:hover {
   border-color: #888;
 }
 
-.PunishForm__length-type:focus {
+.PunishmentPage__expires-type:focus {
   border-color: #aaa;
   box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
   color: #222;
   outline: none;
 }
+
 @media screen and (min-width: 576px) {
-  #PunishForm__length {
+  #PunishmentPage__expires {
     width: 21%
   }
 
-  .PunishForm__length-type {
+  .PunishmentPage__expires-type {
     display: inline-block;
     margin-left: 10px;
   }

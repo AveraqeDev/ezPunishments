@@ -5,6 +5,8 @@ import { Section } from '../../components/Utils/Utils';
 
 import UserApiService from '../../services/user-api-service';
 
+import './UserListPage.css';
+
 class UserListPage extends Component {
   state = { 
     users: [],

@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UserContext from '../../contexts/UserContext';
 import TokenService from '../../services/token-service';
-import IdleService from '../../services/idle-service';
 
 import './Header.css';
 import Burger from './Burger/Burger';
@@ -26,9 +25,6 @@ class Header extends Component {
   handleLogoutClick = () => {
     this.setState({navOpen: false});
     TokenService.clearAuthToken();
-    // when loggin out, clear the callbacks to the refresh api and idle auto logout
-    TokenService.clearCallbackBeforeExpiry();
-    IdleService.unRegisterIdleResets();
     this.context.clearUser();
     this.props.history.push('/');
   }

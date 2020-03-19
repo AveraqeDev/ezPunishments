@@ -7,6 +7,8 @@ import Confirm from '../../components/Confirm/Confirm';
 
 import moment from 'moment';
 
+import './PunishmentPage.css';
+
 class PunishmentPage extends Component {
   static defaultProps = {
     match: {
@@ -156,18 +158,18 @@ class PunishmentPage extends Component {
 
               <div className='expires'>
                 <label htmlFor='PunishmentPage__expires'>
-                  <p><strong>Expires:</strong> {moment(expires).format('YYYY-MM-DD h:mm:ss')}</p>
+                  <p><strong>Expires:</strong> {expires ? moment(expires).format('YYYY-MM-DD h:mm:ss') : 'Never'}</p>
                   <p>(Add time)</p>
                 </label>
-                <Input
+                <input
                   name='length'
                   type='number'
                   id='PunishmentPage__expires'
                   placeholder='1'
-                  disabled={this.state.type === 'Permanent' ? 'disabled' : undefined}
+                  disabled={(this.state.type === 'Permanent' ? 'disabled' : undefined) || !expires}
                 >
-                </Input>
-                <select name='type' className='PunishmentPage__expires-type' onChange={this.handleTypeChange}>
+                </input>
+                <select name='type' className='PunishmentPage__expires-type' onChange={this.handleTypeChange} disabled={!expires}>
                   <option value='h'>Hours</option>
                   <option value='d'>Days</option>
                   <option value='w'>Weeks</option>

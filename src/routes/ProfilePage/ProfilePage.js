@@ -3,6 +3,8 @@ import { Section } from '../../components/Utils/Utils';
 import UserContext from '../../contexts/UserContext';
 import DataTable from '../../components/DataTable/DataTable';
 
+import './ProfilePage.css';
+
 class ProfilePage extends Component {
 
   state = {

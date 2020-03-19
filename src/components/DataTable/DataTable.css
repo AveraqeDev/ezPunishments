@@ -6,9 +6,7 @@
 
 .DataTable {
   padding: 1% 5%;
-  position: relative;
   max-width: 100vw;
-  z-index: -1;
 }
 
 .Cell {
