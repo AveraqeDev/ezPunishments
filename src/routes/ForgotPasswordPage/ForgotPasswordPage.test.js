@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {MemoryRouter} from 'react-router-dom';
 
-import App from './App';
+import ForgotPasswordPage from './ForgotPasswordPage';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { 
@@ -12,10 +12,10 @@ import {
 
 library.add(faGavel);
 
-describe('App', () => {
+describe('ForgotPasswordPage', () => {
 
   it('renders without crashing', () => {
     const div = document.createElement("div");
-    ReactDOM.render(<MemoryRouter><App/></MemoryRouter>, div);
+    ReactDOM.render(<MemoryRouter><ForgotPasswordPage/></MemoryRouter>, div);
   });
 });

@@ -10,6 +10,13 @@ import DataTable from '../../components/DataTable/DataTable';
 import './UserPage.css';
 
 class UserPage extends Component {
+
+  static defaultProps = {
+    match: {
+      params: {}
+    }
+  }
+
   state = {
     user: {},
     punishments: [],
