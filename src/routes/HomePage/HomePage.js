@@ -3,8 +3,6 @@ import { Section } from '../../components/Utils/Utils';
 import DataTable from '../../components/DataTable/DataTable';
 import PunishmentApiService from '../../services/punishment-api-service';
 import TokenService from '../../services/token-service';
-
-import Table from '../../components/Table/Table';
 import Modal from '../../components/Modal/Modal';
 
 import './HomePage.css';
