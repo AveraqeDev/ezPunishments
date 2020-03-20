@@ -1,5 +1,9 @@
-.PunishmentPage {
+.PunishmentPage__punishment {
   text-align: center;
+}
+
+.PunishmentPage__heading p, .PunishmentPage__heading-controls {
+  margin-left: 5%;
 }
 
 #PunishmentPage__expires {

@@ -5,6 +5,7 @@ import UserApiService from '../../services/user-api-service';
 import PunishmentApiService from '../../services/punishment-api-service';
 import UserContext from '../../contexts/UserContext';
 
+import Header from '../../components/Header/Header';
 import DataTable from '../../components/DataTable/DataTable';
 
 import './UserPage.css';
@@ -49,14 +50,15 @@ class UserPage extends Component {
 
   renderPunishments(executed) {
     const punishments = (executed ? this.state.executedPunishments : this.state.punishments);
-    let content = <p>No Punishments Found</p>;
+    let content = <p className='no-data'>No Punishments Found</p>;
     let headings = [
       'ID',
       (executed ? 'Username' : 'Punished_by'),
       'Reason',
       'Active',
       'Punished On',
-      'Expires On'
+      'Expires On',
+      'Controls'
     ];
     let rows = punishments.map(punishment => [
       punishment.id,
@@ -65,7 +67,7 @@ class UserPage extends Component {
       (punishment.active ? 'Yes' : 'No'),
       new Date(punishment.date_punished).toLocaleDateString(),
       (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never'),
-      (<Link className='PunishmentListPage__button' to={`/punishments/${punishment.id}`}>View Punishment</Link>)
+      (<Link className='DataTable__button' to={`/punishments/${punishment.id}`}>View</Link>)
     ]);
     if(rows.length > 0) {
       content = <DataTable headings={headings} rows={rows} />
@@ -93,26 +95,27 @@ class UserPage extends Component {
   }
 
   renderUser() {
+    const { user } = this.state;
     return (
       <>
-        <div className='UserPage__user_heading'>
-          <h2>{this.state.user.user_name}</h2>
-          <div className='UserPage__user_heading-controls'>
-            {this.context.isStaff() && this.state.user.user_role === 'member'
-              ? <Link to={`/punish/${this.state.user.user_name}`}>Punish Player</Link>
-              : ''}
+        <div className='UserPage__heading'>
+          <Header title={user.user_name} />
+          <div className='UserPage__heading-controls'>
+            {this.context.isStaff() && user.user_role === 'member'
+              ? <Link className='DataTable__button' to={`/punish/${user.user_name}`}>Punish Player</Link>
+              : null}
             {this.context.isAdmin()
-              ? (this.state.user.user_role === 'member'
+              ? (user.user_role === 'member'
                   ? <Button onClick={this.handleStaffClick}>Set Staff</Button>
                   : <Button onClick={this.handleStaffClick}>Remove Staff</Button>)
               : ''}
           </div>
         </div>
-        <div className='UserPage__user_body'>
-          {this.state.user.user_role === 'member'
-            ? <h3>Punishment History</h3>
-            : <h3>Executed Punishments</h3>}
-          {this.state.user.user_role !== 'member'
+        <div className='UserPage__body'>
+          {user.user_role !== 'member'
+            ? <Header subtitle='Punishment History' /> 
+            : <Header subtitle='Executed Punishments' />}
+          {user.user_role !== 'member'
             ? this.renderPunishments(true) 
             : this.renderPunishments(false)}
         </div>
@@ -121,14 +124,10 @@ class UserPage extends Component {
   }
 
   render() { 
-    const { error, user } = this.state;
-    let content;
+    const { error } = this.state;
+    let content = <div className='loading' />;
     if(error) {
-      content = (error.error === 'User doesn\'t exist')
-        ? <p className='red'>User not found</p>
-        : <p className='red'>There was an error</p>
-    } else if(!user) {
-      content = <div className='loading' />
+      content = <p className='no-data'>{error.error}</p>
     } else {
       content = this.renderUser();
     }

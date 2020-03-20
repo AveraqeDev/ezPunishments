@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Dialog } from '@reach/dialog';
-import { Button } from '../Utils/Utils';
+import { Button } from '../../Utils/Utils';
 
 import '@reach/dialog/styles.css';
 

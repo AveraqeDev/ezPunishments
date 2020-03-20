@@ -60,18 +60,9 @@ class ProfilePage extends Component {
   }
 
   render() { 
-    const { error, user } = this.context;
-    let content;
-    if(error) {
-      content = <p className='red'>{error.message}</p>
-    } else if(!user) {
-      content = <div className='loading' />
-    } else {
-      content = this.renderUser();
-    }
     return ( 
       <Section className='ProfilePage'>
-        {content}
+        {this.renderUser()}
       </Section>
     );
   }

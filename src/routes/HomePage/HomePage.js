@@ -31,11 +31,9 @@ class HomePage extends Component {
 
   renderPunishments() {
     const { error } = this.state;
-    let content;
+    let content = <div className='loading' />;
     if(error) {
       content = <p className='no-data'>{error.message}</p>
-    } else if(!this.state.punishments) {
-      content = <div className='loading' />
     } else {
       const headings = [
         'Username',
@@ -51,7 +49,11 @@ class HomePage extends Component {
         new Date(punishment.date_punished).toLocaleDateString(),
         (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never')
       ]);
-      content = <DataTable headings={headings} rows={rows} />
+      if(rows.length > 0) {
+        content = <DataTable headings={headings} rows={rows} />
+      } else {
+        content = <p className='no-data'>No Punishments Found</p>
+      }
     }
 
     return content;
@@ -70,7 +72,6 @@ class HomePage extends Component {
   }
 
   render() { 
-    const { error } = this.state;
     return ( 
       <>
         {TokenService.hasAuthToken()
@@ -82,7 +83,7 @@ class HomePage extends Component {
               close={this.handleCloseModal}
             >
               <p>Here you are able to easily manage the players, and their punishments, on your Minecraft Server!</p>
-              <p>To get started you must login with the test user(`admin`) and password(`admin`).</p>
+              <p>To get started you must login with the test user(`admin`) and password(`11AAaa!!`).</p>
               <p>Once logged in, you can navigate to the `Punishments` page to view a list of all punishments executed, to the `Users` page to view a list of registered users, or to the `Punish` page to execute a punishment.</p>
             </Modal>
         }

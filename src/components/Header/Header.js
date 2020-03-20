@@ -2,10 +2,13 @@ import React from 'react';
 
 import './Header.css';
 
-function Header({ title }) {
+function Header({ title, subtitle }) {
   return (
     <div className='Header'>
-      <h2>{title}</h2>
+      {title 
+        ? <h2>{title}</h2>
+        : <h3>{subtitle}</h3>
+      }
       <div />
     </div>
   )

@@ -21,41 +21,19 @@ class UserListPage extends Component {
       .catch(error => this.setState({ error }));
    }
 
-   renderPunishments() {
-    const headings = [
-      'ID',
-      'Email',
-      'Username',
-      'Role',
-      'Date Created'
-    ];
-    const rows = this.state.users.map(user => [
-      user.id,
-      user.email,
-      user.user_name,
-      user.user_role,
-      new Date(user.date_created).toLocaleString(),
-      (<Link className='DataTable__button' to={`/users/${user.id}`}>View</Link>)
-    ]);
-    return(
-      <DataTable headings={headings} rows={rows} />
-    )
-  }
-
   renderUsers() {
     const { error } = this.state;
-    let content;
+    let content = <div className='loading' />;
     if(error) {
       content = <p className='no-data'>{error.message}</p>
-    } else if(!this.state.users) {
-      content = <div className='loading' />
     } else {
       const headings = [
         'ID',
         'Email',
         'Username',
         'Role',
-        'Date Created'
+        'Date Created',
+        'Controls'
       ];
       const rows = this.state.users.map(user => [
         user.id,
@@ -65,7 +43,11 @@ class UserListPage extends Component {
         new Date(user.date_created).toLocaleString(),
         (<Link className='DataTable__button' to={`/users/${user.id}`}>View</Link>)
       ]);
-      content = <DataTable headings={headings} rows={rows} />
+      if(rows.length > 0) {
+        content = <DataTable headings={headings} rows={rows} />
+      } else {
+        content = <p className='no-data'>No Users found</p>
+      }
     }
 
     return content;
