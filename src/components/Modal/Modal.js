@@ -7,7 +7,7 @@ const Modal = (props) => {
         <div className='Back-drop'
           style={{
             opacity: props.show ? '1' : '0',
-            'z-index': props.show ? '50' : '-1'
+            'zIndex': props.show ? '50' : '-1'
           }}
           onClick={props.close}
         />
