@@ -88,7 +88,7 @@ class PunishmentPage extends Component {
     const { punishment, error, edit } = this.state;
     let content= <div className='loading' />;
     if(error) {
-      content = <p className='red'>{error}</p>
+      content = <p className='no-data'>{error}</p>
     } else if(edit) {
       content = <EditPunishmentForm 
                   punishment={punishment} 
