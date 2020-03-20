@@ -29,7 +29,7 @@ const Punishment = ({ punishment, onEdit, onRemove }) => {
               {confirm => (
                 <Button 
                   onClick={confirm(e => onRemove(e))}
-                  disabled={active && this.context.isAdmin() ? undefined : 'disabled'}
+                  disabled={active && context.isAdmin() ? undefined : 'disabled'}
                 >
                   Remove
                 </Button>
