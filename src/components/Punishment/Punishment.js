@@ -37,7 +37,7 @@ const Punishment = ({ punishment, onEdit, onRemove }) => {
             </Confirm>
           </div>
         </div>
-        <div className='PunishmentPage__punishment'>
+        <div className='PunishmentPage__body'>
           <p><strong>Reason:</strong> {reason}</p>
           <p><strong>Proof:</strong> {proof}</p>
           <p><strong>Punished By:</strong> {punished_by}</p>
