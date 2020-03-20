@@ -18,14 +18,14 @@ class UserListPage extends Component {
     this.setState({ error: null });
     UserApiService.getAllUsers()
       .then(users => this.setState({ users }))
-      .catch(error => this.setState({ error }));
+      .catch(error => this.setState({ error: error.error }));
    }
 
   renderUsers() {
     const { error } = this.state;
     let content = <div className='loading' />;
     if(error) {
-      content = <p className='no-data'>{error.message}</p>
+      content = <p className='no-data'>{error}</p>
     } else {
       const headings = [
         'ID',

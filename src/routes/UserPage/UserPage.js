@@ -41,11 +41,11 @@ class UserPage extends Component {
                   executedPunishments
                 })
               })
-              .catch(error => this.setState({error}));
+              .catch(error => this.setState({error: error.error}));
           })
-          .catch(error => this.setState({error}));
+          .catch(error => this.setState({error: error.error}));
       })
-      .catch(error => this.setState({error}));
+      .catch(error => this.setState({error: error.error}));
     }
 
   renderPunishments(executed) {
@@ -91,7 +91,7 @@ class UserPage extends Component {
           }
         })
       )
-      .catch(error => this.setState({error}));
+      .catch(error => this.setState({error: error.error}));
   }
 
   renderUser() {
@@ -127,7 +127,7 @@ class UserPage extends Component {
     const { error } = this.state;
     let content = <div className='loading' />;
     if(error) {
-      content = <p className='no-data'>{error.error}</p>
+      content = <p className='no-data'>{error}</p>
     } else {
       content = this.renderUser();
     }

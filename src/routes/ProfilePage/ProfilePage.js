@@ -10,8 +10,7 @@ import './ProfilePage.css';
 class ProfilePage extends Component {
 
   state = {
-    punishments: [],
-    error: null
+    punishments: []
   }
 
   static contextType = UserContext;

@@ -48,7 +48,7 @@ export class UserProvider extends Component {
     this.setState({ user });
     PunishmentsApiService.getUserPunishments(user)
       .then(punishments => this.setPunishments(punishments))
-      .catch(error => this.setError(error));
+      .catch(error => this.setError(error.error));
   }
 
   clearUser = () => {

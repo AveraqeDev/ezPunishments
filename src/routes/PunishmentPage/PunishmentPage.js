@@ -30,7 +30,7 @@ class PunishmentPage extends Component {
     const { punishmentId } = this.props.match.params;
     PunishmentApiService.getPunishment(punishmentId)
       .then(punishment => this.setState({punishment}))
-      .catch(error => this.setState({error}));
+      .catch(error => this.setState({error: error.error}));
   }
 
   handleEditClick = e => {
@@ -46,6 +46,7 @@ class PunishmentPage extends Component {
       .then(punishment => {
         this.setState({ punishment: {...punishment} })
       })
+      .catch(error => this.setState({error: error.error}))
   }
 
   handleEditCancel = e => {
@@ -80,13 +81,14 @@ class PunishmentPage extends Component {
       .then(punishment => {
         this.setState({ punishment: {...punishment}, edit: false });
       })
+      .catch(error => this.setState({error: error.error}))
   }
 
   render() { 
     const { punishment, error, edit } = this.state;
     let content= <div className='loading' />;
     if(error) {
-      content = <p className='red'>{error.error}</p>
+      content = <p className='red'>{error}</p>
     } else if(edit) {
       content = <EditPunishmentForm 
                   punishment={punishment} 

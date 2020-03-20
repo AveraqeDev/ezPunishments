@@ -27,7 +27,7 @@ class ResetPasswordForm extends Component {
         confirmPassword.value = '';
         this.props.onResetSucces();
       })
-      .catch(error => this.setState({error}));
+      .catch(error => this.setState({error: error.error}));
   }
 
   onPasswordChange = e => {
@@ -36,14 +36,14 @@ class ResetPasswordForm extends Component {
     this.setState({ error: null });
 
     if(!password) {
-      return this.setState({disabledSubmit: 'disabled', error: { message: 'New Password is required.'}});
+      return this.setState({disabledSubmit: 'disabled', error: 'New Password is required.'});
     }
     if(!confirmPassword) {
-      return this.setState({disabledSubmit: 'disabled', error: { message: 'Confirm New Password is required'}});
+      return this.setState({disabledSubmit: 'disabled', error: 'Confirm New Password is required'});
     }
     
     if(password !== confirmPassword) {
-      return this.setState({disabledSubmit: 'disabled', error: { message: 'Passwords do not match.'}});
+      return this.setState({disabledSubmit: 'disabled', error: 'Passwords do not match.'});
     }
     return this.setState({ disableSubmit: undefined, error: null })
   }
@@ -56,7 +56,7 @@ class ResetPasswordForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-    {error && <p className='red'>{error.message}</p>}
+    {error && <p className='no-data'>{error}</p>}
         </div>
         <div className='password'>
           <label htmlFor='ResetPasswordForm__password'>

@@ -17,14 +17,14 @@ class PunishmentListPage extends Component {
     this.setState({ error: null });
     PunishmentApiService.getPunishments()
       .then(punishments => this.setState({punishments}))
-      .catch(error => this.setState({error}));
+      .catch(error => this.setState({error: error.error}));
   }
 
   renderPunishments() {
     const { punishments, error } = this.state;
     let content = <div className='loading' />;
     if(error) {
-      content = <p className='no-data'>{error.message}</p>
+      content = <p className='no-data'>{error}</p>
     } else {
       const headings = [
         'ID',

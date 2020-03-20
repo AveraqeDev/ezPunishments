@@ -29,7 +29,7 @@ class LoginForm extends Component {
         this.props.onLoginSuccess(res.authToken);
       })
       .catch(error => {
-        this.setState({ error });
+        this.setState({ error: error.error });
       });
   }
   
@@ -41,7 +41,7 @@ class LoginForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-    {error && <p className='red'>{error.message}</p>}
+    {error && <p className='no-data'>{error}</p>}
         </div>
         <div className='username'>
           <label htmlFor='LoginForm__username'>

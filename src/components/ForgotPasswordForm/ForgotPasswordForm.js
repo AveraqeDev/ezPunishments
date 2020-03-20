@@ -41,7 +41,7 @@ class ForgotPasswordForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-          {error && <p className='red'>{error.message}</p>}
+          {error && <p className='no-data'>{error}</p>}
         </div>
         <div className='username'>
           <label htmlFor='ForgotPasswordForm__username'>
