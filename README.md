@@ -1,6 +1,6 @@
-# eZPunishments - Server
+# eZPunishments - Client
 
-This is the server API for the eZPunishments Client!
+This is the client application for the eZPunishments Project!
 
 eZPunishments is an easy alternative to executing and managing punishments for your Minecraft server. It allows you to easily view edit, and execute punishments all with a sleek design.
 
