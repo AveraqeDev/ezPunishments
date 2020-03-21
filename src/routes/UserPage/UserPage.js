@@ -113,8 +113,8 @@ class UserPage extends Component {
         </div>
         <div className='UserPage__body'>
           {user.user_role !== 'member'
-            ? <Header subtitle='Punishment History' /> 
-            : <Header subtitle='Executed Punishments' />}
+            ? <Header subtitle='Executed Punishments' /> 
+            : <Header subtitle='Punishment History' />}
           {user.user_role !== 'member'
             ? this.renderPunishments(true) 
             : this.renderPunishments(false)}
