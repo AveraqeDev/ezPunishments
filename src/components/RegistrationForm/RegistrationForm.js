@@ -43,7 +43,7 @@ class RegistrationForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-          {error && <p className='no-data'>{error}</p>}
+          {error && <p className='error'>{error}</p>}
         </div>
         <div className='email'>
           <label htmlFor='RegistrationForm__email'>

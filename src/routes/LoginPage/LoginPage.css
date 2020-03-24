@@ -3,13 +3,13 @@
 }
 
 .LoginPage__logo {
-  color: #1D1D39;
+  color: white;
   text-decoration: none;
   cursor: pointer;
   font-size: 2rem;
 }
 
 .LoginPage > p {
-  color: #545477;
+  color: #EFEFEF;
   font-size: 18px;
 }

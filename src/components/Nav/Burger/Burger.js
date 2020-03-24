@@ -9,6 +9,7 @@ const Burger = (props) => {
 
   return (
     <button 
+      aria-label='Burger Menu'
       className='Burger'
       onClick={handleClick}
     >

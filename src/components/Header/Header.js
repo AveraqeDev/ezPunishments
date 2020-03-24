@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Header.css';
 
-function Header({ title, subtitle }) {
+function Header({ title, subtitle, color }) {
   return (
     <div className='Header'>
       {title 

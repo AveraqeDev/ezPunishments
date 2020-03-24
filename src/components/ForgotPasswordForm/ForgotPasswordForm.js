@@ -3,6 +3,7 @@ import { Input, Button, Required } from '../Utils/Utils';
 
 import UserApiService from '../../services/user-api-service';
 
+import './ForgotPasswordForm.css';
 class ForgotPasswordForm extends Component {
   
   static defaultProps = {
@@ -41,7 +42,7 @@ class ForgotPasswordForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-          {error && <p className='no-data'>{error}</p>}
+          {error && <p className='error'>{error}</p>}
         </div>
         <div className='username'>
           <label htmlFor='ForgotPasswordForm__username'>

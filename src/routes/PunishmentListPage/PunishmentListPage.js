@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PunishmentApiService from '../../services/punishment-api-service';
 import { Section } from '../../components/Utils/Utils';
-import DataTable from '../../components/DataTable/DataTable';
 
 import './PunishmentListPage.css';
 import Header from '../../components/Header/Header';
+
+import PunishmentCard from '../../components/PunishmentCard/PunishmentCard';
 
 class PunishmentListPage extends Component {
   state = {
@@ -25,30 +25,16 @@ class PunishmentListPage extends Component {
     let content = <div className='loading' />;
     if(error) {
       content = <p className='no-data'>{error}</p>
-    } else {
-      const headings = [
-        'ID',
-        'IGN',
-        'Reason',
-        'Punished By',
-        'Active',
-        'Expires',
-        'Controls'
+    } else if(punishments[0]) {
+      const info = [
+        'id',
+        'name',
+        'reason',
+        'punished_by',
+        'active',
+        'expires'
       ];
-      const rows = punishments.map(punishment => [
-        punishment.id,
-        punishment.name,
-        punishment.reason,
-        punishment.punished_by,
-        (punishment.active ? 'Yes' : 'No'),
-        (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never'),
-        (<Link className='DataTable__button' to={`/punishments/${punishment.id}`}>View</Link>)
-      ]);
-      if(rows.length > 0) {
-        content = <DataTable headings={headings} rows={rows} />
-      } else {
-        content = <p className='no-data'>No Punishments Found</p>
-      }
+      content = punishments.map(punishment => <PunishmentCard key={punishment.id} punishment={punishment} info={info} withControls={true} />);
     }
     return content;
   }

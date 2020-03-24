@@ -1,0 +1,28 @@
+.UserCard {
+  display: flex;
+  background: #2C2C4D;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border: 2px solid #EFEFEF;
+  border-radius: 10px;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2), 0 7px 20px 0 rgba(0,0,0,0.17);
+  padding: 15px;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.UserCard__header {
+  text-decoration: none;
+}
+
+.UserCard__date, .UserCard__details-container {
+  margin-left: 5px;
+  color: #EFEFEF;
+}
+
+@media screen and (min-width: 800px) {
+  .UserCard {
+    max-width: 800px;
+  }
+}
