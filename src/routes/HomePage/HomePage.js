@@ -37,24 +37,8 @@ class HomePage extends Component {
     if(error) {
       content = <p className='no-data'>{error}</p>
     } else {
-      // const headings = [
-      //   'Username',
-      //   'Punished By',
-      //   'Reason',
-      //   'Punished On',
-      //   'Expires On'
-      // ];
-      // const rows = this.state.punishments.map(punishment => [
-      //   punishment.name,
-      //   punishment.punished_by,
-      //   punishment.reason,
-      //   new Date(punishment.date_punished).toLocaleDateString(),
-      //   (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never')
-      // ]);
       if(punishments[0]) {
-        // content = <DataTable headings={headings} rows={rows} />
         const info = [
-          'id',
           'punished_by',
           'expires'
         ];

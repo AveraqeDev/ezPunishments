@@ -31,13 +31,23 @@ class ResetPasswordForm extends Component {
   }
 
   onPasswordChange = e => {
-    const { password, confirmPassword } = this.state;
+    const password = e.target.value;
 
-    this.setState({ error: null });
+    this.setState({ password });
 
     if(!password) {
       return this.setState({disabledSubmit: 'disabled', error: 'New Password is required.'});
     }
+
+    return this.setState({ disableSubmit: undefined, error: null })
+  }
+
+  onConfirmPasswordChange = e => {
+    const { password } = this.state;
+    const confirmPassword = e.target.value;
+
+    this.setState({ error: null, disableSubmit: undefined, confirmPassword });
+
     if(!confirmPassword) {
       return this.setState({disabledSubmit: 'disabled', error: 'Confirm New Password is required'});
     }
@@ -45,7 +55,6 @@ class ResetPasswordForm extends Component {
     if(password !== confirmPassword) {
       return this.setState({disabledSubmit: 'disabled', error: 'Passwords do not match.'});
     }
-    return this.setState({ disableSubmit: undefined, error: null })
   }
 
   render() { 
@@ -56,7 +65,7 @@ class ResetPasswordForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-    {error && <p className='no-data'>{error}</p>}
+          {error && <p className='error'>{error}</p>}
         </div>
         <div className='password'>
           <label htmlFor='ResetPasswordForm__password'>
@@ -79,7 +88,7 @@ class ResetPasswordForm extends Component {
             name='confirmPassword'
             type='password'
             id='ResetPasswordForm__confirm-password'
-            onChange={this.onPasswordChange}
+            onChange={this.onConfirmPasswordChange}
           ></Input>
         </div>
         <Button 

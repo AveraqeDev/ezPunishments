@@ -66,7 +66,7 @@ class PunishForm extends Component {
         onSubmit={this.handleSubmit}
       >
         <div role='alert'>
-          {error && <p className='no-data'>{error}</p>}
+          {error && <p className='error'>{error}</p>}
         </div>
         <div className='name'>
           <label htmlFor='PunishForm__name'>

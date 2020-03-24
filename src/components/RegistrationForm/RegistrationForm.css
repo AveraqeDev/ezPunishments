@@ -1,8 +1,12 @@
 .RegistrationForm__existing_account {
   font-size: .7em;
-  color: #545477;
+  color: gainsboro;
 }
 
 .RegistrationForm__login {
-  color: #545477;
+  color: gainsboro;
+}
+
+.RegistrationForm label {
+  color: white;
 }

@@ -1,13 +1,17 @@
 .LoginForm__forgot {
   font-size: .7em;
-  color: #545477;
+  color: gainsboro;
 }
 
 .LoginForm__not_member {
   font-size: .8em;
-  color: #545477;
+  color: gainsboro;
 }
 
 .LoginForm__register {
-  color: #545477;
+  color: gainsboro;
+}
+
+.LoginForm label {
+  color: white;
 }

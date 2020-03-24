@@ -3,13 +3,13 @@
 }
 
 .RegistrationPage__logo {
-  color: #1D1D39;
+  color: white;
   text-decoration: none;
   cursor: pointer;
   font-size: 2rem;
 }
 
 .RegistrationPage > p {
-  color: #545477;
+  color: white;
   font-size: 18px;
 }

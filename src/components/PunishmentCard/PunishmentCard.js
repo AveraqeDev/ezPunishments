@@ -11,7 +11,7 @@ const PunishmentCard = (props) => {
   const { punishment, info, withControls } = props;
   return ( 
     <div className='PunishmentCard'>
-      <Link className='PunishmentCard__header' to={`/punishment/${punishment.id}`}>
+      <Link className='PunishmentCard__header' to={`/punishments/${punishment.id}`}>
         <Header subtitle={punishment.name} />
       </Link>
       <span className='PunishmentCard__date'>{punishment.updated ? `Modified On: ${moment(punishment.updated).toDate().toDateString()}` : `Applied On: ${moment(punishment.date_punished).toDate().toDateString()}`}</span>

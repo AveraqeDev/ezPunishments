@@ -12,6 +12,7 @@ body {
   text-rendering: optimizeLegibility;
   overflow: hidden;
   background: #545477;
+  color: #EFEFEF;
   overflow-y: scroll;
 }
 
@@ -32,6 +33,10 @@ body {
 
 .no-data {
   margin-left: 5%;
+}
+
+.error {
+  color: red;
 }
 
 .DataTable__button {
