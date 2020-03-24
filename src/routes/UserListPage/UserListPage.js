@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import DataTable from '../../components/DataTable/DataTable';
 import { Section } from '../../components/Utils/Utils';
 
 import UserApiService from '../../services/user-api-service';
