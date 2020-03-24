@@ -36,16 +36,13 @@ class HomePage extends Component {
     let content = <div className='loading' />;
     if(error) {
       content = <p className='no-data'>{error}</p>
-    } else {
-      if(punishments[0]) {
-        const info = [
-          'punished_by',
-          'expires'
-        ];
-        content = punishments.map(punishment => <PunishmentCard key={punishment.id} punishment={punishment} info={info} />);
-      }
+    } else if(punishments[0]) {
+      const info = [
+        'punished_by',
+        'expires'
+      ];
+      content = punishments.map(punishment => <PunishmentCard key={punishment.id} punishment={punishment} info={info} />);
     }
-
     return content;
   }
 

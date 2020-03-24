@@ -33,6 +33,7 @@ body {
 
 .no-data {
   margin-left: 5%;
+  color: red;
 }
 
 .error {

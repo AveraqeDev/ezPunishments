@@ -7,6 +7,7 @@ import UserApiService from '../../services/user-api-service';
 
 import './UserListPage.css';
 import Header from '../../components/Header/Header';
+import UserCard from '../../components/UserCard/UserCard';
 
 class UserListPage extends Component {
   state = { 
@@ -22,34 +23,18 @@ class UserListPage extends Component {
    }
 
   renderUsers() {
-    const { error } = this.state;
+    const { error, users } = this.state;
     let content = <div className='loading' />;
     if(error) {
       content = <p className='no-data'>{error}</p>
-    } else {
-      const headings = [
-        'ID',
-        'Email',
-        'Username',
-        'Role',
-        'Date Created',
-        'Controls'
+    } else if(users[0]) {
+      const info = [
+        'id',
+        'email',
+        'user_role'
       ];
-      const rows = this.state.users.map(user => [
-        user.id,
-        user.email,
-        user.user_name,
-        user.user_role,
-        new Date(user.date_created).toLocaleString(),
-        (<Link className='DataTable__button' to={`/users/${user.id}`}>View</Link>)
-      ]);
-      if(rows.length > 0) {
-        content = <DataTable headings={headings} rows={rows} />
-      } else {
-        content = <p className='no-data'>No Users found</p>
-      }
+      content = users.map(user => <UserCard key={user.id} user={user} info={info} withControls={true} />);
     }
-
     return content;
   }
 

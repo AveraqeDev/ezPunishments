@@ -30,7 +30,7 @@ const PunishmentCard = (props) => {
                 content = punishment[detail];
                 break;
             }
-            return <p key={`${Math.random()}`}className='PunishmentCard__detail'>{`${header}: ${content}`}</p>
+            return <p key={`${Math.random()}`}className='PunishmentCard__detail'>{`${header.replace('_', ' ')}: ${content}`}</p>
           }
         )}
       </div>
