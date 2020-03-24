@@ -7,6 +7,23 @@ eZPunishments is an easy alternative to executing and managing punishments for y
 ## Live App
 https://ezpunishments-app.averaqedev.now.sh/
 
+## Screenshots
+
+**Modal**
+[Modal](./screenshots/modal.png)
+
+**Home Page**
+[Home Page](./screenshots/homepage.png)
+
+**Punishments Page**
+[Punishments Page](./screenshots/punishmentspage.png)
+
+**Users Page**
+[Users Page](./screenshots/userspage.png)
+
+**Punish Page**
+[Punish Page](./screenshots/punishpage.png)
+
 ## API Documentation
 
 [Click Here to View](DOCUMENTATION.md)
