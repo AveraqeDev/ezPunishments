@@ -6,7 +6,7 @@ import './Menu.css';
 const Menu = (props) => {
   const { open, setOpen, onLogout, isStaff, isAdmin } = props;
   return (
-    <nav className={`Menu ${open ? 'nav_open' : ''}`}>
+    <nav className={'Menu'}>
       {isStaff()
         ? <Link
             className='Menu__link'

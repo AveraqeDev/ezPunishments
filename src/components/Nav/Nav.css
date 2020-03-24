@@ -4,6 +4,7 @@
   text-align: center;
   padding: 0 5px;
   background: #0D0D20;
+  overflow: hidden;
 }
 
 .Nav__logo {
@@ -21,4 +22,18 @@
 
 .Nav__logo_icon {
   margin-left: 10px;
+}
+
+.Menu-enter {
+  transform: translateX(100%);
+}
+
+.Menu-enter-active {
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.Menu-exit-active {
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
 }

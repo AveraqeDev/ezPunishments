@@ -4,11 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UserContext from '../../contexts/UserContext';
 import TokenService from '../../services/token-service';
 
+import { CSSTransition } from 'react-transition-group';
+
 import './Nav.css';
 import Burger from './Burger/Burger';
 import Menu from './Menu/Menu';
 
-class Header extends Component {
+class Nav extends Component {
   
   static defaultProps = {
     history: {
@@ -86,11 +88,18 @@ class Header extends Component {
             </Link>
           </h1>
           <Burger open={navOpen} setOpen={this.setOpen} />
-          <Menu open={navOpen} setOpen={this.setOpen} onLogout={this.handleLogoutClick} isStaff={this.context.isStaff} isAdmin={this.context.isAdmin} />
+          <CSSTransition 
+            in={navOpen}
+            timeout={300}
+            classNames='Menu'
+            unmountOnExit
+          >
+            <Menu open={navOpen} setOpen={this.setOpen} onLogout={this.handleLogoutClick} isStaff={this.context.isStaff} isAdmin={this.context.isAdmin} />
+          </CSSTransition>
         </nav>
       );
     }
   }
 }
  
-export default withRouter(Header);
+export default withRouter(Nav);

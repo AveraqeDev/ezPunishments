@@ -1,25 +1,26 @@
 .Menu {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background: #2C2C4D;
   height: 100%;
+  width: 100%;
   text-align: right;
   padding: 2rem;
+  padding-top: 6rem;
   position: absolute;
   top: 0;
   right: 0;
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(100%);
 }
 
 .Menu__link {
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
   padding: 2rem 0;
   font-weight: bold;
   letter-spacing: 0.5rem;
   color: #EFEFEF;
+  text-align: center;
   text-decoration: none;
   transition: color 0.3s linear;
 }
@@ -30,22 +31,29 @@
 }
 
 .logout {
-  text-align: right;
   background: transparent;
   border: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   .Menu {
-    width: 100%;
+    width: 50%;
   }
 
   .Menu__link {
-    font-size: 1.5rem;
-    text-align: center;
+    font-size: 2rem;
+    text-align: right;
   }
 }
 
-.nav_open {
-  transform: translateX(0);
+@media screen and (min-width: 1025px) {
+  .Menu {
+    width: 30%;
+    justify-content: center;
+  }
+
+  .Menu__link {
+    font-size: 2rem;
+    text-align: right;
+  }
 }
