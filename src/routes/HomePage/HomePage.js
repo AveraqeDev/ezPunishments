@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Section } from '../../components/Utils/Utils';
-import DataTable from '../../components/DataTable/DataTable';
+// import DataTable from '../../components/DataTable/DataTable';
 import PunishmentApiService from '../../services/punishment-api-service';
 import TokenService from '../../services/token-service';
 import Modal from '../../components/Modal/Modal';
 import Header from '../../components/Header/Header';
+
+import PunishmentCard from '../../components/PunishmentCard/PunishmentCard';
 
 import './HomePage.css';
 
@@ -30,29 +32,33 @@ class HomePage extends Component {
   }
 
   renderPunishments() {
-    const { error } = this.state;
+    const { error, punishments } = this.state;
     let content = <div className='loading' />;
     if(error) {
       content = <p className='no-data'>{error}</p>
     } else {
-      const headings = [
-        'Username',
-        'Punished By',
-        'Reason',
-        'Punished On',
-        'Expires On'
-      ];
-      const rows = this.state.punishments.map(punishment => [
-        punishment.name,
-        punishment.punished_by,
-        punishment.reason,
-        new Date(punishment.date_punished).toLocaleDateString(),
-        (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never')
-      ]);
-      if(rows.length > 0) {
-        content = <DataTable headings={headings} rows={rows} />
-      } else {
-        content = <p className='no-data'>No Punishments Found</p>
+      // const headings = [
+      //   'Username',
+      //   'Punished By',
+      //   'Reason',
+      //   'Punished On',
+      //   'Expires On'
+      // ];
+      // const rows = this.state.punishments.map(punishment => [
+      //   punishment.name,
+      //   punishment.punished_by,
+      //   punishment.reason,
+      //   new Date(punishment.date_punished).toLocaleDateString(),
+      //   (punishment.expires ? new Date(punishment.expires).toLocaleDateString() : 'Never')
+      // ]);
+      if(punishments[0]) {
+        // content = <DataTable headings={headings} rows={rows} />
+        const info = [
+          'id',
+          'punished_by',
+          'expires'
+        ];
+        content = punishments.map(punishment => <PunishmentCard key={punishment.id} punishment={punishment} info={info} />);
       }
     }
 
